@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Seller</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <% if item.user != @user %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.user.username %></td>
+          <td><%= link_to 'Show', user_item_path(@user,item) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

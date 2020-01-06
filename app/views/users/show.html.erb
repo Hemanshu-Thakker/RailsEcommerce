@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @user.password %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @user.balance %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %> |
+<%= link_to 'Add Product', new_user_item_path(@user)  %> |
+<%= link_to 'Shop', user_items_path(@user) %>
+<br>
+<hr>
+
+<div class="row">
+	<div class="col-lg-6">
+		<h3>Selling Products</h3>
+		<% @user.items.each do |item| %>
+			<p><strong><%= item.name %></strong></p>
+			<p><%= item.price %></p>
+			<p><%= link_to 'Destroy', "/users/#{@user['id']}/items/#{item['id']}", method: :delete, data: { confirm: 'Are you sure?' } %></p>
+		<% end %>	
+	</div>
+	<div class="col-lg-6">
+		<h3>Bought Products</h3>
+		<% @user.orders.each do |order| %>
+			<p><strong>Name:<%= order.item.name %></strong></p>
+			<p>Price:<%= order.item.price %></p>
+			<p>Quantity:<%= order.quantity %>
+		<% end %>	
+	</div>
+</div>
