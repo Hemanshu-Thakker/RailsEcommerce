@@ -51,7 +51,8 @@ class OrdersController < ApplicationController
 
 	def show
 		super
-		@order=Order.find(params[:id])
+		@user=User.find(params[:user_id])
+		redirect_to "/users/#{@user['id']}/orders"
 	end
 	def order_params
       params.require(:order).permit(:quantity)

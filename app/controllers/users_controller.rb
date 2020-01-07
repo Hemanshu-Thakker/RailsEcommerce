@@ -62,6 +62,28 @@ class UsersController < ApplicationController
     end
   end
 
+  #dispaly users selling products
+  def sold
+    @user = User.find(params[:user_id])
+    @orders= Array.new
+    Order.all.each do |order|
+      if order.item.user.id == @user.id
+        @orders.push(order)
+      end
+    end
+  end
+
+  #display bought products
+  def orders
+    @user = User.find(params[:user_id])
+    @orders= Array.new
+    Order.all.each do |order|
+      if order.user_id == @user.id
+        @orders.push(order)
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

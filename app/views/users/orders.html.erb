@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @user.username %>'s orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product </th>
+      <th> Quantity</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |ord| %>
+      <tr>
+        <td><%= ord.item.name %></td>
+        <td><%= ord.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Back', user_path(@user) %>
