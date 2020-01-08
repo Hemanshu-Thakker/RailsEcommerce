@@ -19,4 +19,18 @@
  }
  .fonty{
  	font-size: 20px;
+ 	margin-left: 4px;
+ 	margin-right: 4px;
+ 	padding: 4px;
+ 	color: white;
+ }
+ .fonty:hover{
+ 	text-decoration: none;
+ 	background-color: green;
+ }
+
+ nav{
+ 	background-color: #f7f7f7;
+ 	height: 60px;
+ 	border-bottom: 1px sold #606060FF;
  }

@@ -1,20 +1,12 @@
 class ApplicationController < ActionController::Base
-	def index
-    	if params[:user_id] == nil
-      		@user= User.find(4)
-      		@user.username= "Login"
-      		@user.balance= nil
-    	else
-      		@user= User.find(params[:user_id])
-    	end
-	end
-	def show
-    	if params[:user_id] == nil
-      		@user= User.find(4)
-      		@user.username= "Login"
-      		@user.balance= nil
-    	else
-      		@user= User.find(params[:user_id])
-    	end
-	end
+	helper_method :current_user
+  
+  def current_user
+    if session[:user_id]
+      @current_user ||= User.find(session[:user_id])
+    else
+      @current_user = nil
+    end
+  end
+  
 end
