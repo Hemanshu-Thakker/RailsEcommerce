@@ -1,43 +1,45 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @item.quantity %>
-</p>
-
-<p>
-  <strong>Seller:</strong>
-  <%= @item.user.username %>
-</p>
-
-<%= form_with(model: @order, url: user_item_orders_path(@user,@item) , local: true) do |form| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-      <ul>
-      <% @order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<section class="container">
+  <div class="row sandwich">
+    <div class="col-lg-6">
     </div>
-  <% end %>
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
-  </div>
-  <div class="actions">
-    <%= form.submit "Buy" %> |	
-  	<%= link_to 'Back', user_items_path %>
+    <div class="col-lg-6">
+      <h4>
+        <%= @item.name %>
+      </h4>
+
+      <h2>Rs.
+        <%= @item.price %>
+      </h2>
+
+      <h6>
+        <strong>Quantity left:</strong>
+        <%= @item.quantity %>
+      </h6>
+
+      <h6>
+        <strong>Seller:</strong>
+        <%= @item.user.username %>
+      </h6>
+
+      <%= form_with(model: @order, url: user_item_orders_path(@user,@item) , local: true) do |form| %>
+        <% if @order.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+            <ul>
+            <% @order.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= form.label :quantity %>
+        <%= form.number_field :quantity %>
+        
+        <%= form.submit "Buy" %> |  
+        <%= link_to 'Back', user_items_path %>
+        
+      <% end %>
+    </div>
   </div>
   
-<% end %>
+</section>

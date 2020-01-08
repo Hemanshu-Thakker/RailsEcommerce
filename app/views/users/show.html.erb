@@ -1,17 +1,15 @@
-<p id="notice"><%= notice %></p>
+<section class="container sandwich">
+	<h3>
+	  <strong>Username:</strong>
+	  <%= @user.username %>
+	</h3>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+	<h4>
+	  <strong>Balance:</strong>
+	  <%= @user.balance %>
+	</h4>
 
-<p>
-  <strong>Balance:</strong>
-  <%= @user.balance %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', user_items_path(@user) %> |
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-<br>
-<hr>
+	<%= link_to 'Edit', edit_user_path(@user) %> |
+	<%= link_to 'Back', user_items_path(@user) %> |
+	<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+</section>

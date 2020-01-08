@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @user, notice: 'Item was successfully created.' }
+        format.html { redirect_to user_items_path(@user) }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }

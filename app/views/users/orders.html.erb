@@ -1,23 +1,24 @@
-<p id="notice"><%= notice %></p>
-
-<h1><%= @user.username %>'s orders</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Product </th>
-      <th> Quantity</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<section class="container sandwich">
+  <div class="">
     <% @orders.each do |ord| %>
-      <tr>
-        <td><%= ord.item.name %></td>
-        <td><%= ord.quantity %></td>
-      </tr>
+      <div class="soldrow-styling">
+        <div class="row">
+          <div class="col-lg-3">
+            
+          </div>
+          <div class="col-lg-3">
+            <h3><%= ord.item.name %></h3>
+            <h5>Rs. <%= ord.item.price %></h5>
+          </div>
+          <div class="col-lg-3">
+            <h4>Bought quantity: <%= ord.quantity %></h4>
+            <h6>Order purchased on <%= ord.created_at %></h6>
+          </div>
+          <div class="col-lg-3">
+            <p>reordering functionalities and other review functionalities will be added later</p>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-<br>
-<%= link_to 'Back', user_path(@user) %>
+  </div>
+</section>

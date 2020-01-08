@@ -12,31 +12,31 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :username %>
+    <%= form.label :username , :class => "label-style"%>
     <%= form.text_field :username %>
   </div>
 
   <div class="field">
-    <%= form.label :password %>
+    <%= form.label :password , :class => "label-style"%>
     <%= form.password_field :password %>
   </div>
 
   <div class="field">
-    <%= form.label :password_confirmation %>
+    <%= form.label :password_confirmation , :class => "label-style"%>
     <%= form.password_field :password_confirmation %>
   </div>
 
   <div class="field">
-    <%= form.label :balance %>
+    <%= form.label :balance , :class => "label-style"%>
     <%= form.number_field :balance %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
+    <%= form.label :email , :class => "label-style"%>
     <%= form.text_field :email %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create" , :class => "label-style"%>
   </div>
 <% end %>
