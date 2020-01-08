@@ -11,9 +11,7 @@
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %> |
-<%= link_to 'Sold', "/users/#{@user['id']}/sold" %> |
-<%= link_to 'Bought', "/users/#{@user['id']}/orders" %> |
+<%= link_to 'Back', user_items_path(@user) %> |
 <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <br>
 <hr>

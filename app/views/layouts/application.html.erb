@@ -11,28 +11,62 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="overall-alteration">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <% if current_user %>
+    <body class="overall-alteration">
+      <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link fonty" href="/">Home <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link fonty" href="#"><%= @user.username %></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link fonty" href="#"><%= @user.balance %></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <div class="collapse navbar-collapse container" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <%= link_to 'Profile', user_path(current_user), :class => "fonty" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to 'Sold', "/users/#{current_user['id']}/sold", :class => "fonty" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to 'Bought', "/users/#{current_user['id']}/orders", :class => "fonty" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to 'Add Products', new_user_item_path(current_user) , :class => "fonty" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "Log out", logout_path, :class => "fonty" %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <% else %>
+      <body class="overall-alteration">
+        <nav class="navbar navbar-expand-lg">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse container" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <%= link_to "Sign up", signup_path, :class => "fonty" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Log In", login_path, :class => "fonty"  %>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      <% end %>
+
+
+
+
     <div class="container">
       <%= yield %>
     </div>

@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
 			@order.errors.add(:user_id,"Insufficient balance")
 			render 'items/show'
 		else
-			buy(@user,@item,order_params["quantity"].to_i)
+			@user.buy(@user,@item,order_params["quantity"].to_i)
 			redirect_to user_item_order_path(@user['id'],@item['id'],@order['id'])
 		end
 	end
@@ -37,26 +37,7 @@ class OrdersController < ApplicationController
 	# 	redirect_to user_item_path
 	# end
 
-	def buy(user,item,quant)
-		# Rails.logger.info "@@@@@ mail sending time"
-		UserMailer.buyer_confirmation(user).deliver
-		# Rails.logger.info "@@@@@ Done sending mail"
-		# Deduct money from the buyer
-		balance_updater = user.balance - quant*item.price.to_i
-		user.update(balance: balance_updater)
-		# mails the buyer
-		# Add money seller
-		balance_updater = item.user.balance.to_i + quant*item.price.to_i
-		item.user.update(balance: balance_updater)
-		# mail the seller
-		UserMailer.seller_confirmation(item.user).deliver
-		# Alter quantity of the product
-		item_updater = item.quantity.to_i - quant
-		item.update(quantity: item_updater)
-	end
-
 	def show
-		super
 		@user=User.find(params[:user_id])
 		redirect_to "/users/#{@user['id']}/orders"
 	end

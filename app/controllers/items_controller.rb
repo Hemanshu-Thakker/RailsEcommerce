@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    super
     @user= User.find(params[:user_id])
     @items = Item.all
   end
