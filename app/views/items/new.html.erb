@@ -1,5 +1,9 @@
-<h1>New Item</h1>
+<section class="container sandwich">
+	<div class="form-base-styling">
+		<%= render 'form', item: @item %>
+		<%= link_to 'Back', user_items_path(@user), :class => "label-style" %>
+	</div>	
+</section>
 
-<%= render 'form', item: @item %>
 
-<%= link_to 'Back', user_path(@user) %>
+

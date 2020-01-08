@@ -9,11 +9,7 @@ class OrdersController < ApplicationController
 		# render plain: params[:order].inspect
 		@user= User.find(params[:user_id])
 		@item= Item.find(params[:item_id])
-		Rails.logger.info "@@@@@ #{params}"
-		Rails.logger.info "@@@@@ #{order_params}"
-		Rails.logger.info "@@@@@ #{@item}"
-		Rails.logger.info "@@@@@ #{@item.price}"
-		Rails.logger.info "@@@@@ #{@user.balance}"
+		
 		Rails.logger.info "@@@@@ #{order_params["quantity"]}"
 
 		@order= Order.create(user_id: @user.id, item_id: @item.id, quantity: order_params["quantity"])

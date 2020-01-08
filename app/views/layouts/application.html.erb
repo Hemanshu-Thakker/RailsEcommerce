@@ -11,39 +11,42 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <% if current_user %>
-    <body class="overall-alteration">
-      <nav class="navbar navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  <body class="overall-alteration">
+    <% if current_user %>
+    
+      <header class="border_styling">
+        <nav class="navbar navbar-expand-lg">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-        <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <%= link_to 'Profile', user_path(current_user), :class => "fonty" %>
-            </li>
-            <li class="nav-item active">
-              <%= link_to 'Sold', "/users/#{current_user['id']}/sold", :class => "fonty" %>
-            </li>
-            <li class="nav-item active">
-              <%= link_to 'Bought', "/users/#{current_user['id']}/orders", :class => "fonty" %>
-            </li>
-            <li class="nav-item active">
-              <%= link_to 'Add Products', new_user_item_path(current_user) , :class => "fonty" %>
-            </li>
-            <li class="nav-item active">
-              <%= link_to "Log out", logout_path, :class => "fonty" %>
-            </li>
-          </ul>
-        </div>
-      </nav>
+          <div class="collapse navbar-collapse container" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <%= link_to 'Profile', user_path(current_user), :class => "fonty" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sold', "/users/#{current_user['id']}/sold", :class => "fonty" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Bought', "/users/#{current_user['id']}/orders", :class => "fonty" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Add Products', new_user_item_path(current_user) , :class => "fonty" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Log out", logout_path, :class => "fonty extra-effect" %>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
     <% else %>
-      <body class="overall-alteration">
+      <header class="border_styling">
         <nav class="navbar navbar-expand-lg">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,18 +60,16 @@
                 <%= link_to "Sign up", signup_path, :class => "fonty" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Log In", login_path, :class => "fonty"  %>
+                <%= link_to "Log In", login_path, :class => "fonty extra-effect"  %>
               </li>
             </ul>
           </div>
         </nav>
-      <% end %>
+      </header>
+    <% end %>
 
 
 
-
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>

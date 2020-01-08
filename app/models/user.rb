@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	has_many :orders
 
 	validates :username, presence: true, uniqueness: true
-	validates :password, presence:true, length: { minimum: 5 }
+	validates :password_digest, presence:true, length: { minimum: 5 }
 
 	EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
@@ -12,8 +12,10 @@ class User < ApplicationRecord
 		# mail the buyer
 		UserMailer.buyer_confirmation(user).deliver
 		# Deduct money from the buyer
+		Rails.logger.info "@@@@@ #{user.balance}"
 		balance_updater = user.balance - quant*item.price.to_i
 		user.update(balance: balance_updater)
+		Rails.logger.info "@@@@@ #{user.balance}"
 		# Add money seller
 		balance_updater = item.user.balance.to_i + quant*item.price.to_i
 		item.user.update(balance: balance_updater)
