@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
@@ -5,7 +6,14 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @user= User.find(params[:user_id])
-    @items = Item.all
+    # @items = Item.paginate(:page => params[:page], :per_page=>12)
+    @Items= Array.new
+    Item.all.each do |item|
+      if item.user != @user
+        @Items.push(item)
+      end
+    end
+    @items= @Items.paginate(:page => params[:page], :per_page=>12)
   end
 
   # GET /items/1
@@ -65,14 +73,6 @@ class ItemsController < ApplicationController
       format.html { redirect_to @user, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def buy
-    @user= User.find(params[:user_id])
-
-    @quantity
-    # deductMoney(@user)
-    # @user1= User.find(:all, :condition => {user_id != @user.id})
   end
 
   private

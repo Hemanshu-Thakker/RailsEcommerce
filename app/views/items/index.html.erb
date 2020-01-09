@@ -25,5 +25,6 @@
       <% end %>  
     <% end %>
   </div>
+  <%= will_paginate @items, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 </section>
 

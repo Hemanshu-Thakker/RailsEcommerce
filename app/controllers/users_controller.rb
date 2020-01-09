@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    # @users = User.all
+    @users  = User.paginate(:page => params[:page], :per_page=>5)
   end
 
   # GET /users/1
@@ -57,8 +58,9 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
+    session[:user_id] = nil
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to login_path, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -85,6 +87,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_money
+    @user= User.find(params[:user_id])
+  end
+
+  def increment_balance
+    @money= params[:balance].to_i
+    @user= User.find(params[:user_id])
+    if @user.balance == nil or @user.balance==0
+      if @user.update(balance: @money)
+        redirect_to user_items_path(@user)
+      else 
+        render "add_money"
+      end
+    else
+      @money = @money + @user.balance
+      if @user.update(balance: @money)
+        redirect_to user_items_path(@user)
+      else 
+        render "add_money"
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -93,6 +118,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :balance, :email)
+      params.require(:user).permit(:username, :password, :password_confirmation, :email)
     end
 end
