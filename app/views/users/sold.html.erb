@@ -1,5 +1,4 @@
 <section class="container sandwich">
-  <div class="">
     <% @orders.each do |ord| %>
       <div class="soldrow-styling">
         <div class="row">
@@ -20,5 +19,5 @@
         </div>
       </div>
     <% end %>
-  </div>
+    <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
 </section>

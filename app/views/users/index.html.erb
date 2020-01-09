@@ -14,16 +14,18 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.balance %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Add Products', new_user_item_path(user) %></td>
-        <td><%= link_to 'Shop', user_items_path(user) %></td>
-      </tr>
-    <% end %>
+    <%= will_paginate @users, renderer: BootstrapPagination::Rails %> 
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= user.balance %></td>
+          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Add Products', new_user_item_path(user) %></td>
+          <td><%= link_to 'Shop', user_items_path(user) %></td>
+        </tr>
+      <% end %>
+    <%= will_paginate @users %> 
   </tbody>
 </table>
 </center>

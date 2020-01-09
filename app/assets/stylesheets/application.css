@@ -30,7 +30,7 @@
  	color: white;
  }
 
- nav{
+ .nav-stling{
  	background-color: #f7f7f7;
  	height: 60px;
  	border-bottom: 3px solid green;
@@ -51,7 +51,7 @@
  	text-decoration: none;
  }
  .width-alt{
- 	max-width: 100%!important;
+ 	min-width: 285px!important;
  	color: #666;
  }
 
@@ -113,4 +113,17 @@
 
  .label-style{
  	font-size: 18px;
+ }
+
+ .btn-st{
+ 	text-align: center;
+ 	padding: 15px;
+ 	margin-top: 30px;
+ 	background-color: green;
+ 	color: white;
+ }
+
+ .btn-st:hover{
+ 	background-color: green;
+ 	color: white;
  }
