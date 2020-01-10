@@ -1,6 +1,6 @@
 <section class="container-fluid">
   <div class="search-styling sandwich">
-    <%= form_with(  ) do |form| %>
+    <%= form_with(url: search_path , local: true ) do |form| %>
       <%= form.text_field :search %>
       <%= form.submit "Search" %>
     <% end %>
@@ -14,7 +14,11 @@
         <%= link_to user_item_path(@user,item) do %>
           <div class="width-alt col-lg-3">
             <div class="card extra-padding">
-              <img src="" class="card-img-top" alt="Image">
+              <div class="img-st-dim">
+                <% if item.item_img.attached? %>
+                  <image src="<%=(  url_for(item.item_img) )%>" class="img-styling">
+                <% end %>
+              </div>
               <div class="card-body">
                 <h4 class="card-title"><%= item.name %></h4>
                 <h2 class="card-text">Rs. <%= item.price %></h2>

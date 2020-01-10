@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get 'users/:user_id/sold' => 'users#sold'
   get 'users/:user_id/orders' => 'users#orders'
   get 'users/:user_id/add_money' => 'users#add_money', as: 'add_money'
-  post 'users/:user_id/increment_balance' => 'users#increment_balance', as: 'increment_balance'
+  post 'users/:user_id/search' => 'items#search', as: 'search'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 

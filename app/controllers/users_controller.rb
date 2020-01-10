@@ -68,23 +68,25 @@ class UsersController < ApplicationController
   #dispaly users selling products
   def sold
     @user = User.find(params[:user_id])
-    @orders= Array.new
+    @Orders= Array.new
     Order.all.each do |order|
       if order.item.user.id == @user.id
-        @orders.push(order)
+        @Orders.push(order)
       end
     end
+    @orders= @Orders.paginate(:page => params[:page], :per_page=>4)
   end
 
   #display bought products
   def orders
     @user = User.find(params[:user_id])
-    @orders= Array.new
+    @Orders= Array.new
     Order.all.each do |order|
       if order.user_id == @user.id
-        @orders.push(order)
+        @Orders.push(order)
       end
     end
+    @orders= @Orders.paginate(:page => params[:page], :per_page=>4)
   end
 
   def add_money
@@ -108,6 +110,7 @@ class UsersController < ApplicationController
         render "add_money"
       end
     end
+
   end
 
   private

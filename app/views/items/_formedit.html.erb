@@ -1,0 +1,37 @@
+<%= form_with(model: item, url: user_item_path(@item), local: true) do |form| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, :class => "label-style" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, :class => "label-style" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity, :class => "label-style" %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div class="">
+    <%= form.label :item_image, :class => "label-style" %>
+    <%= form.file_field :item_img %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save" , :class => "label-style" %>
+  </div>
+<% end %>

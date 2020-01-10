@@ -19,5 +19,5 @@
         </div>
       </div>
     <% end %>
-    <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @orders, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 </section>
