@@ -127,3 +127,21 @@
  	background-color: green;
  	color: white;
  }
+
+ nav li span{
+ 	background-color: #008000c4!important;
+ 	border-color: #008000c4!important;
+ }
+
+ .disabled{
+ 	display: none!important;
+ }
+
+ .img-styling{
+ 	height: 150px;
+ 	width: 150px;
+ }
+
+ .img-st-dim{
+ 	text-align: center;
+ }

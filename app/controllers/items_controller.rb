@@ -16,6 +16,20 @@ class ItemsController < ApplicationController
     @items= @Items.paginate(:page => params[:page], :per_page=>12)
   end
 
+  #Search index page
+  def search
+    @user= User.find(params[:user_id])
+    search= params[:search]
+    @Items= Array.new
+    Item.all.each do |item|
+      if item.name.include?search 
+        @Items.push(item)
+      end
+    end
+    @items= @Items.paginate(:page => params[:page], :per_page=>12)
+    render 'index'
+  end
+
   # GET /items/1
   # GET /items/1.json
   def show
@@ -31,6 +45,8 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @user= User.find(params[:user_id])
+
   end
 
   # POST /items
@@ -53,9 +69,10 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    # @item.item_img.attach(params[:item_img])
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.html { redirect_to user_items_path(current_user) }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -83,7 +100,7 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :price, :quantity)
+      params.require(:item).permit(:name, :price, :quantity, :item_img)
     end
 
     #orders params

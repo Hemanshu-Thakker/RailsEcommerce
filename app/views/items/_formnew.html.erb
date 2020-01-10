@@ -26,6 +26,11 @@
     <%= form.number_field :quantity %>
   </div>
 
+  <div class="">
+    <%= form.label :item_image, :class => "label-style" %>
+    <%= form.file_field :item_img %>
+  </div>
+
   <div class="actions">
     <%= form.submit "Save" , :class => "label-style" %>
   </div>
