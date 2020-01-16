@@ -14,7 +14,6 @@
   </thead>
 
   <tbody>
-    <%= will_paginate @users, renderer: BootstrapPagination::Rails %> 
       <% @users.each do |user| %>
         <tr>
           <td><%= user.username %></td>

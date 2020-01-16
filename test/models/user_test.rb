@@ -5,10 +5,17 @@ class UserTest < ActiveSupport::TestCase
   #   assert true
   # end
   def setup
-  	@user= User.new(username: "Heman", password:"heman", email: "hemanshupthakker", balance: "20000" )
+  	@user= users(:romanone)
   end
 
   test 'valid user' do
-    assert_not @user.valid?
+    assert @user.valid?
   end
+
+  # test "valid buy" do
+  # 	@item=items(:two)
+  # 	@user.buy(@item,1)
+  # 	assert_equal(@user.balance,1900)
+  # end
+
 end

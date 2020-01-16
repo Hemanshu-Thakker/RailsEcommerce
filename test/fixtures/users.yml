@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  username: MyString
-  password: MyString
-  balance: 1
+romanone:
+  username: Hemanshu
+  password_digest: MyString
+  email: hemanshupthakker@gmail.com
+  balance: 2000
 
-two:
-  username: MyString
-  password: MyString
-  balance: 1
+romantwo:
+  username: reigns
+  password_digest: MyString
+  email: two@yahoo.com
+  balance: 2000
