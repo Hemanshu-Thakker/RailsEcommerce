@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+  	@item = items(:one) 
+  end
 
+  test "valid item" do
+    assert @item.valid?
+  end
+  
 end

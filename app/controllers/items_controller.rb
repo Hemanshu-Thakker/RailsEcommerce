@@ -72,6 +72,8 @@ class ItemsController < ApplicationController
     # @item.item_img.attach(params[:item_img])
     respond_to do |format|
       if @item.update(item_params)
+        # if current_user==nil then current_user=params[:user_id]; end
+        binding.pry
         format.html { redirect_to user_items_path(current_user) }
         format.json { render :show, status: :ok, location: @item }
       else
