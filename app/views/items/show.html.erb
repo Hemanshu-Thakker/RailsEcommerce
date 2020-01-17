@@ -14,6 +14,19 @@
         <%= @item.price %>
       </h2>
 
+      <% if @item.comments.exists? %>
+        <div class="display-inline3">
+          <% (1..@average_rating.to_i).each do %>
+            <%= image_tag("star.png", :class => "star-img") %>
+          <% end %>
+          <% if @average_rating.ceil(0)-@average_rating.to_i == 1 %>
+            <%= image_tag("half-star.png", :class => "star-img") %>
+          <% end %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <h5 class="size-inc"><%= @average_rating %> out of 5</h5>
+        </div>
+      <% end %>
+
       <h6>
         <strong>Quantity left:</strong>
         <%= @item.quantity %>
@@ -35,8 +48,7 @@
             </ul>
           </div>
         <% end %>
-        <%= form.label :quantity %>
-        <%= form.number_field :quantity %>
+        <%= form.number_field :quantity, placeholder: " Quantity " %>
         
         <%= form.submit "Buy" %> |  
         <%= link_to 'Back', user_items_path %>
@@ -50,7 +62,7 @@
       <div class="col-lg-6">
         <div class="sandwich">
           <h3>Add Comment</h3>
-          <%= form_with(model: @comment, url: user_item_comments_path(@user,@item) , local: true) do |form| %>
+          <%= form_with(model: @comment, url: user_item_comments_path(@user,@item) , local: true)  do |form| %>
             <% if @comment.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -61,24 +73,39 @@
                 </ul>
               </div>
             <% end %>
-            <%= form.text_field :body %>
-            <%= form.submit "Add" %>  
+            <div class="display-inline">
+              <%= form.text_field :body, placeholder: " Comment " %>&nbsp;&nbsp;&nbsp;
+              <%= form.number_field :rating, step: :any, :class => "rat-st" %>&nbsp;<span class="rat-st2">/5</span>&nbsp;&nbsp;&nbsp;
+              <br>
+              <%= form.submit "Add" %>
+            </div>  
           <% end %>
         </div>
-        <div class="sandwich">
-          <table width="400">  
+        <div class="sandwich">  
             <% @item.comments.each do |cmt| %>
-            <tr>
-              <td><strong><%= cmt.user.username %></strong></td>
-              <td><%= cmt.body %></td>
-              <td>
-                <% if @item.orders.exists?(user_id: cmt.user.id, item_id: cmt.item.id) %>
-                  <span class="redit">*verified purchase</span>
-                <% end %>
-              </td>
-            </tr>
+              <div class="cmt-styling">
+                <div class="display-inline2">
+                  <h4 class="heading-cmt"><%= cmt.user.username %></h4>
+                  <% if @item.orders.exists?(user_id: cmt.user.id, item_id: cmt.item.id) %>
+                    <span class="redit">*verified purchase</span>
+                  <% end %>
+                </div>
+                <div class="display-inline3">
+                  <% (1..cmt.rating.to_i).each do %>
+                    <%= image_tag("star.png", :class => "star-img") %>
+                  <% end %>
+                  <% if cmt.rating.ceil(0)-cmt.rating.to_i == 1 %>
+                    <%= image_tag("half-star.png", :class => "star-img") %>
+                  <% end %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <h5 class="size-inc"><%= cmt.rating %> out of 5</h5>
+                </div>
+                <div class="">
+                  <h5><%= cmt.body %></h5>
+                  <span>Comment created on <%= cmt.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></span>
+                </div>
+              </div>
             <% end %>
-          </table>
         </div>
       </div>
     </div>

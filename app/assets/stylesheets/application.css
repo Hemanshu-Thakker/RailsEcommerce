@@ -160,3 +160,56 @@
  	color: red;
  	margin-left:50px;
  }
+
+ .size-inc{
+ 	font-size: 17px;
+ }
+
+ .size-inc2{
+ 	font-size: 15px;
+ }
+
+ .button-style{
+ 	padding: 3px 50px;
+ 	margin: 8px ;
+ 	border: 1px solid #949494;
+ 	border-radius: 2px;
+ 	background-color: #e5e5e585;
+ }
+
+ .button-style:hover{
+ 	background-color: green;
+ 	color: white;
+ 	cursor: pointer;
+ }
+
+ .rat-st{
+ 	max-width: 40px;
+ }
+
+ .rat-st2{
+ 	font-size: 2.40rem;
+ }
+
+ .display-inline{
+ 	display: flex;
+ 	align-items: center;
+ }
+ .display-inline2{
+ 	display: flex;
+ 	justify-content: space-between;
+ }
+ .display-inline3{
+ 	display: flex;
+ }
+
+ .star-img{
+ 	width: 20px;
+ 	height: 20px;
+ }
+
+ .cmt-styling{
+ 	background-color: #e5e5e585;
+ 	padding: 18px;
+ 	margin: 20px 0px;
+ }
