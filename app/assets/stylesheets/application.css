@@ -142,6 +142,21 @@
  	width: 150px;
  }
 
+ .img-styling-2{
+ 	height: 300px;
+ 	width: 300px;
+ }
+
+ .img-styling-3{
+ 	height: 80px;
+ 	width: 80px;
+ }
+
  .img-st-dim{
  	text-align: center;
+ }
+
+ .redit{
+ 	color: red;
+ 	margin-left:50px;
  }

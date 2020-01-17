@@ -2,6 +2,7 @@ class User < ApplicationRecord
 	has_secure_password
 	has_many :items , :dependent => :delete_all
 	has_many :orders, :dependent => :delete_all
+	has_many :comments, :dependent => :delete_all
 
 	validates :username, presence: true, uniqueness: true
 	validates :password_digest, presence:true, length: { minimum: 5 }

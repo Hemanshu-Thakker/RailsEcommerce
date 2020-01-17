@@ -35,6 +35,7 @@ class ItemsController < ApplicationController
   def show
     @user= User.find(params[:user_id])
     @order= Order.new
+    @comment= Comment.new
   end
 
   # GET /items/new

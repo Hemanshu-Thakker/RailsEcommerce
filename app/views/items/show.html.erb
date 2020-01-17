@@ -1,6 +1,9 @@
 <section class="container">
   <div class="row sandwich">
     <div class="col-lg-6">
+      <% if @item.item_img.attached? %>
+        <image src="<%=(  url_for(@item.item_img) )%>" class="img-styling-2">
+      <% end %>
     </div>
     <div class="col-lg-6">
       <h4>
@@ -41,5 +44,44 @@
       <% end %>
     </div>
   </div>
+
+  <section class="container">
+    <div class="row sandwich">
+      <div class="col-lg-6">
+        <div class="sandwich">
+          <h3>Add Comment</h3>
+          <%= form_with(model: @comment, url: user_item_comments_path(@user,@item) , local: true) do |form| %>
+            <% if @comment.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+                <ul>
+                <% @comment.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <%= form.text_field :body %>
+            <%= form.submit "Add" %>  
+          <% end %>
+        </div>
+        <div class="sandwich">
+          <table width="400">  
+            <% @item.comments.each do |cmt| %>
+            <tr>
+              <td><strong><%= cmt.user.username %></strong></td>
+              <td><%= cmt.body %></td>
+              <td>
+                <% if @item.orders.exists?(user_id: cmt.user.id, item_id: cmt.item.id) %>
+                  <span class="redit">*verified purchase</span>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
   
 </section>

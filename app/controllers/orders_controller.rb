@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
 	def index
+		@user= User.find(params[:user_id])
+		@item= Item.find(params[:item_id])
+		redirect_to user_item_path(@user,@item)
 	end
 	def update
 	end
@@ -9,6 +12,7 @@ class OrdersController < ApplicationController
 		# render plain: params[:order].inspect
 		@user= User.find(params[:user_id])
 		@item= Item.find(params[:item_id])
+		@comment= Comment.new
 		
 		Rails.logger.info "@@@@@ #{order_params["quantity"]}"
 
@@ -25,19 +29,15 @@ class OrdersController < ApplicationController
 			render 'items/show'
 		else
 			@user.buy(@item,order_params["quantity"].to_i)
-			binding.pry
 			redirect_to user_item_order_path(@user['id'],@item['id'],@order['id'])
 		end
 	end
-
-	# def new
-	# 	redirect_to user_item_path
-	# end
 
 	def show
 		@user=User.find(params[:user_id])
 		redirect_to "/users/#{@user['id']}/orders"
 	end
+
 	def order_params
       params.require(:order).permit(:quantity)
     end
