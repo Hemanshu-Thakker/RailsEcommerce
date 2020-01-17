@@ -13,11 +13,16 @@ class OrdersController < ApplicationController
 		@user= User.find(params[:user_id])
 		@item= Item.find(params[:item_id])
 		@comment= Comment.new
+		@average_rating= Comment.findAverageRating(@item)
 		
 		Rails.logger.info "@@@@@ #{order_params["quantity"]}"
 
 		@order= Order.create(user_id: @user.id, item_id: @item.id, quantity: order_params["quantity"])
 		if order_params["quantity"]=="" or order_params["quantity"] == nil 
+			render 'items/show'
+		elsif @user.balance==nil or @user.balance==0
+			@order.destroy
+			@order.errors.add(:quantity,"is given but Add Money to your account")
 			render 'items/show'
 		elsif order_params["quantity"].to_i > @item.quantity
 			@order.destroy

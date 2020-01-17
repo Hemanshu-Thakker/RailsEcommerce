@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_124051) do
     t.integer "user_id"
     t.integer "item_id"
     t.text "body"
+    t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_comments_on_item_id"

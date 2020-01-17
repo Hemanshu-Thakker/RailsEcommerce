@@ -11,7 +11,8 @@ class CommentsController < ApplicationController
 		@user= User.find(params[:user_id])
 		@item= Item.find(params[:item_id])
 		@order= Order.new
-		@comment= Comment.create(user_id: @user.id ,item_id: @item.id ,body: comment_params["body"]) 
+		@average_rating= Comment.findAverageRating(@item)
+		@comment= Comment.create(user_id: @user.id ,item_id: @item.id ,body: comment_params["body"], rating: comment_params["rating"]) 
 		if comment_params["body"]==nil or comment_params["body"]==""
 			@comment.destroy
 			render 'items/show'
@@ -26,6 +27,6 @@ class CommentsController < ApplicationController
 	end
 
 	def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body,:rating)
     end
 end

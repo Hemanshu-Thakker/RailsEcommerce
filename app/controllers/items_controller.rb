@@ -20,22 +20,28 @@ class ItemsController < ApplicationController
   def search
     @user= User.find(params[:user_id])
     search= params[:search]
-    @Items= Array.new
-    Item.all.each do |item|
-      if item.name.include?search 
-        @Items.push(item)
+    if search==nil or search==""
+      redirect_to user_items_path(@user)
+    else
+      @Items= Array.new
+      Item.all.each do |item|
+        if item.name.include?search 
+          @Items.push(item)
+        end
       end
+      @items= @Items.paginate(:page => params[:page], :per_page=>12)
+      render 'index'
     end
-    @items= @Items.paginate(:page => params[:page], :per_page=>12)
-    render 'index'
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
     @user= User.find(params[:user_id])
+    @item= Item.find(params[:id])
     @order= Order.new
     @comment= Comment.new
+    @average_rating= Comment.findAverageRating(@item)
   end
 
   # GET /items/new
