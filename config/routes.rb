@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'sessions#new'
   resources :users do 
   	resources :items do
-  		resources :orders 
+  		resources :orders
+      resources :comments
   	end
   end
 
