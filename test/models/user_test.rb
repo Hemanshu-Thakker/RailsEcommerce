@@ -10,12 +10,16 @@ class UserTest < ActiveSupport::TestCase
 
   test 'valid user' do
     assert @user.valid?
+    assert_not_nil @user.username
   end
 
-  # test "valid buy" do
-  # 	@item=items(:two)
-  # 	@user.buy(@item,1)
-  # 	assert_equal(@user.balance,1900)
-  # end
+  test 'valid email' do 
+    assert @user.valid?
+    assert_not_nil @user.email
+  end
+
+  test 'valid password' do
+    assert @user.password_digest.length >=5
+  end
 
 end
