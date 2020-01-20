@@ -68,14 +68,15 @@ class UsersController < ApplicationController
   #dispaly users selling products
   def sold
     @user = User.find(params[:user_id])
-    @Orders = Array.new
+    @orders_array = Array.new
     @revOrders= Array.new
-    Order.all.each do |order|
-      if order.item.user.id == @user.id
-        @Orders.push(order)
+    @user.items.each do |item|
+      # if order.item.user.id == @user.id
+      item.orders.each do |order|
+        @orders_array.push(order)
       end
     end
-    @Orders.reverse_each do |e|
+    @orders_array.reverse_each do |e|
       @revOrders.push(e)
     end
     @orders= @revOrders.paginate(:page => params[:page], :per_page=>4)
@@ -84,14 +85,19 @@ class UsersController < ApplicationController
   #display bought products
   def orders
     @user = User.find(params[:user_id])
-    @Orders= Array.new
+    @orders_array= Array.new
     @revOrders= Array.new
-    Order.all.each do |order|
-      if order.user_id == @user.id
-        @Orders.push(order)
-      end
+
+    # 100k Order are there
+    # User 1 Comes to check his orders
+    # User 1 has 2 orders
+
+    @user.orders.each do |order|
+        @orders_array.push(order)
     end
-    @Orders.reverse_each do |e|
+
+
+    @orders_array.reverse_each do |e|
       @revOrders.push(e)
     end
     @orders= @revOrders.paginate(:page => params[:page], :per_page=>4)
