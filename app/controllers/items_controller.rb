@@ -6,14 +6,14 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @user= User.find(params[:user_id])
-    # @items = Item.paginate(:page => params[:page], :per_page=>12)
-    @Items= Array.new
+    # @items = Item.paginate(:page => params[:page], :per_page=>12
+    @items_array= Array.new
     Item.all.each do |item|
       if item.user != @user
-        @Items.push(item)
+        @items_array.push(item)
       end
     end
-    @items= @Items.paginate(:page => params[:page], :per_page=>12)
+    @items= @items_array.paginate(:page => params[:page], :per_page=>12)
   end
 
   #Search index page
@@ -23,13 +23,13 @@ class ItemsController < ApplicationController
     if search==nil or search==""
       redirect_to user_items_path(@user)
     else
-      @Items= Array.new
+      @items_array= Array.new
       Item.all.each do |item|
-        if item.name.include?search 
-          @Items.push(item)
+        if item.name.downcase.include?search.downcase 
+          @items_array.push(item)
         end
       end
-      @items= @Items.paginate(:page => params[:page], :per_page=>12)
+      @items= @items_array.paginate(:page => params[:page], :per_page=>12)
       render 'index'
     end
   end
@@ -41,7 +41,6 @@ class ItemsController < ApplicationController
     @item= Item.find(params[:id])
     @order= Order.new
     @comment= Comment.new
-    @average_rating= Comment.findAverageRating(@item)
   end
 
   # GET /items/new

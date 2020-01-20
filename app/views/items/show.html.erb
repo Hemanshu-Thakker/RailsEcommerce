@@ -16,14 +16,17 @@
 
       <% if @item.comments.exists? %>
         <div class="display-inline3">
-          <% (1..@average_rating.to_i).each do %>
+          <% (1..getAverageRating(@item).to_i).each do %>
             <%= image_tag("star.png", :class => "star-img") %>
           <% end %>
-          <% if @average_rating.ceil(0)-@average_rating.to_i == 1 %>
+          <% if getAverageRating(@item).ceil(0)-getAverageRating(@item).to_i == 1 %>
             <%= image_tag("half-star.png", :class => "star-img") %>
           <% end %>
+          <% (getAverageRating(@item).ceil(0)+1..5).each do %>
+            <%= image_tag("star_dull.png", :class => "star-img") %>
+          <% end %>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <h5 class="size-inc"><%= @average_rating %> out of 5</h5>
+          <h5 class="size-inc"><%= getAverageRating(@item) %> out of 5</h5>
         </div>
       <% end %>
 
