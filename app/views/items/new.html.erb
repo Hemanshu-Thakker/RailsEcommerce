@@ -1,7 +1,7 @@
 <section class="container sandwich">
 	<div class="form-base-styling">
 		<%= render 'formnew', item: @item %>
-		<%= link_to 'Back', user_items_path(@user), :class => "label-style" %>
+		<%= link_to 'Back', user_items_path(getCurrentUser), :class => "label-style" %>
 	</div>	
 </section>
 

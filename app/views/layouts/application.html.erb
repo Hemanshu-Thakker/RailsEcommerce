@@ -27,6 +27,9 @@
             </ul>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
+                <%= link_to 'Home', user_items_path(current_user) , :class => "fonty" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to 'Profile', user_path(current_user), :class => "fonty" %>
               </li>
               <li class="nav-item">
@@ -34,6 +37,9 @@
               </li>
               <li class="nav-item">
                 <%= link_to 'Bought', "/users/#{current_user['id']}/orders", :class => "fonty" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Your Items', "/users/#{current_user['id']}/your_items", :class => "fonty" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'Add Products', new_user_item_path(current_user) , :class => "fonty" %>

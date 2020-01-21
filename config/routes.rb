@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'users/:user_id/sold' => 'users#sold'
   get 'users/:user_id/orders' => 'users#orders'
   get 'users/:user_id/add_money' => 'users#add_money', as: 'add_money'
+  get 'users/:user_id/your_items' => 'users#your_items', as: 'your_items'
   post 'users/:user_id/increment_balance' =>'users#increment_balance' , as: 'increment_balance'
   post 'users/:user_id/search' => 'items#search', as: 'search'
   get 'users/:user_id/search' => 'items#search'
