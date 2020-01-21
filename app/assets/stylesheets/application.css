@@ -213,3 +213,12 @@
  	padding: 18px;
  	margin: 20px 0px;
  }
+
+ .fancy-box{
+ 	width: 20px;
+ 	height: 20px;
+ }
+
+ .opacity-change{
+ 	opacity: .4;
+ }

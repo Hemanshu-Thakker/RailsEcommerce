@@ -36,20 +36,7 @@ class User < ApplicationRecord
 		end
 	end
 
-	# def update_money(user,item,value)
-	# 	user.update(balance: user.balance-value)
-	# 	item.user.update(balance: item.user.balance-value)
-	# end
-
 	def update_quantity(item,quantity)
 		item.update(quantity: item.quantity.to_i - quantity)
 	end
-
-	# def authenticate(username,password)
-	# 	if self.username == username && self.password == password
-	# 		return true
-	# 	end
-	# 	return false
-	# end
-
 end

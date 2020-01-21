@@ -1,5 +1,5 @@
 <section class="container sandwich">
-		<%= form_with(url: increment_balance_path(@user), local: true) do |form| %>
+		<%= form_with(url: increment_balance_path(getCurrentUser), local: true) do |form| %>
   			<%= form.label :balance , :class => "label-style"%>
   			<%= form.number_field :balance %>
   			<%= form.submit "Add" %>

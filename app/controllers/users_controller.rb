@@ -1,24 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
   def index
-    # @users = User.all
     @users  = User.paginate(:page => params[:page], :per_page=>5)
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
 
@@ -26,7 +19,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
@@ -43,13 +35,13 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        session[:user_id] = @user.id
-        format.html { redirect_to user_items_path(@user)}
-        format.json { render :show, status: :ok, location: @user }
+      if current_user.update(user_params)
+        session[:user_id] = current_user.id
+        format.html { redirect_to user_items_path(current_user)}
+        format.json { render :show, status: :ok, location: current_user }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: current_user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +49,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    current_user.destroy
     session[:user_id] = nil
     respond_to do |format|
       format.html { redirect_to login_path, notice: 'User was successfully destroyed.' }
@@ -65,61 +57,39 @@ class UsersController < ApplicationController
     end
   end
 
-  #dispaly users selling products
-  def sold
-    @user = User.find(params[:user_id])
-    @orders_array = Array.new
-    @revOrders= Array.new
-    @user.items.each do |item|
-      # if order.item.user.id == @user.id
-      item.orders.each do |order|
-        @orders_array.push(order)
-      end
-    end
-    @orders_array.reverse_each do |e|
-      @revOrders.push(e)
-    end
-    @orders= @revOrders.paginate(:page => params[:page], :per_page=>4)
+  #dispaly users sold products
+  def sold                      
+    @orders=Order.joins(:item).where("items.user_id IN (?)",current_user.id).paginate(:page => params[:page], :per_page=>4)
+    # @items= @user.items.paginate(:page => params[:page], :per_page=>4)
+  end
+
+  # display users selling products
+  def your_items
+    @items=current_user.items.paginate(:page => params[:page], :per_page=>4)
   end
 
   #display bought products
   def orders
-    @user = User.find(params[:user_id])
-    @orders_array= Array.new
-    @revOrders= Array.new
-
-    # 100k Order are there
-    # User 1 Comes to check his orders
-    # User 1 has 2 orders
-
-    @user.orders.each do |order|
-        @orders_array.push(order)
-    end
-
-
-    @orders_array.reverse_each do |e|
-      @revOrders.push(e)
-    end
-    @orders= @revOrders.paginate(:page => params[:page], :per_page=>4)
+    @orders= current_user.orders.reverse().paginate(:page => params[:page], :per_page=>4)
   end
 
+  # Add money to your account
   def add_money
-    @user= User.find(params[:user_id])
   end
 
+  # Increment balance in your account
   def increment_balance
     @money= params[:balance].to_i
-    @user= User.find(params[:user_id])
-    if @user.balance == nil or @user.balance==0
-      if @user.update(balance: @money)
-        redirect_to user_items_path(@user)
+    if current_user.balance == nil or current_user.balance==0
+      if current_user.update(balance: @money)
+        redirect_to user_items_path(current_user)
       else 
         render "add_money"
       end
     else
-      @money = @money + @user.balance
-      if @user.update(balance: @money)
-        redirect_to user_items_path(@user)
+      @money = @money + current_user.balance
+      if current_user.update(balance: @money)
+        redirect_to user_items_path(current_user)
       else 
         render "add_money"
       end

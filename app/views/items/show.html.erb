@@ -33,6 +33,7 @@
       <h6>
         <strong>Quantity left:</strong>
         <%= @item.quantity %>
+        &nbsp;&nbsp;&nbsp;&nbsp;!!! Hurry Up !!!
       </h6>
 
       <h6>
@@ -40,7 +41,7 @@
         <%= @item.user.username %>
       </h6>
 
-      <%= form_with(model: @order, url: user_item_orders_path(@user,@item) , local: true) do |form| %>
+      <%= form_with(model: @order, url: user_item_orders_path(getCurrentUser,@item) , local: true) do |form| %>
         <% if @order.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -65,7 +66,7 @@
       <div class="col-lg-6">
         <div class="sandwich">
           <h3>Add Comment</h3>
-          <%= form_with(model: @comment, url: user_item_comments_path(@user,@item) , local: true)  do |form| %>
+          <%= form_with(model: @comment, url: user_item_comments_path(getCurrentUser,@item) , local: true)  do |form| %>
             <% if @comment.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>

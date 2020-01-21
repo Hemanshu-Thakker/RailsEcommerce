@@ -11,7 +11,7 @@
   <div class="row sandwich">
     <% @items.each do |item| %>
       <% if item.user != @user %>
-        <%= link_to user_item_path(@user,item) do %>
+        <%= link_to user_item_path(getCurrentUser,item) do %>
           <div class="width-alt col-lg-3">
             <div class="card extra-padding">
               <div class="img-st-dim">
