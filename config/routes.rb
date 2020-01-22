@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  default_url_options :host => "localhost", :port => "3000"
+
   root 'sessions#new'
   resources :users do 
   	resources :items do
@@ -19,6 +21,13 @@ Rails.application.routes.draw do
   post 'users/:user_id/increment_balance' =>'users#increment_balance' , as: 'increment_balance'
   post 'users/:user_id/search' => 'items#search', as: 'search'
   get 'users/:user_id/search' => 'items#search'
+  get 'password_reset/:id' => 'sessions#password_reset', as: 'password_reset'
+  get 'get_user' => 'sessions#get_user'
+  post 'validate_user' => 'sessions#validate_user'
+  get 'validate_user' => 'sessions#validate_user'
+  get 'update_password/:id' => 'sessions#update_password'
+  post 'update_password/:id' => 'sessions#update_password', as: 'update_password'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

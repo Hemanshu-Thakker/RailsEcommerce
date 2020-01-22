@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    render :layout => 'unuser'
   end
 
   def edit

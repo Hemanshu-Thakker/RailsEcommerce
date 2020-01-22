@@ -13,4 +13,8 @@ class UserMailer < ApplicationMailer
 		@item= item
 		mail(to: @user.email, subject: "Item updated")
 	end
+	def password_reseter(user)
+		@user=user
+		mail(to: @user.email, subject: "Password Reset")
+	end
 end
