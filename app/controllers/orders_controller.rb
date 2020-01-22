@@ -31,8 +31,12 @@ class OrdersController < ApplicationController
 			@order.errors.add(:user_id,"Insufficient balance")
 			render 'items/show'
 		else
-			current_user.buy(@item,order_params["quantity"].to_i)
-			redirect_to user_item_order_path(current_user['id'],@item['id'],@order['id'])
+			if current_user.buy(@item,order_params["quantity"].to_i)
+				redirect_to user_item_order_path(current_user['id'],@item['id'],@order['id'])
+			else
+				@order.destroy
+				redirect_to user_item_path(current_user['id'],@item['id'])
+			end
 		end
 	end
 
