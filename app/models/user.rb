@@ -29,10 +29,12 @@ class User < ApplicationRecord
 			update_quantity(item,quant)
 			# item_updater = item.quantity.to_i - quant
 			# item.update(quantity: item_updater)
+			true
 		rescue
 			self.update(balance: standard_user.balance)
 			item.user.update(balance: standard_item.user.balance)
 			item.update(quantity: standard_quant)
+			false
 		end
 	end
 
