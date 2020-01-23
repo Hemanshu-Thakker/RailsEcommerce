@@ -7,9 +7,9 @@ class UserMailer < ApplicationMailer
 		@user= user
 		mail(to: @user.email, subject: "Product succesfully sold")
 	end
-	def item_update(user,before_item,item)
+	def item_update(user,item)
+		binding.pry
 		@user=user
-		@before_item=before_item
 		@item= item
 		mail(to: @user.email, subject: "Item updated")
 	end

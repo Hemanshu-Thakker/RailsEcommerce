@@ -3,9 +3,7 @@
       <div class="soldrow-styling">
         <div class="row">
           <div class="col-lg-3 img-st-dim">
-            <% if ord.item.item_img.attached? %>
-              <image src="<%=(  url_for(ord.item.item_img) )%>" class="img-styling-3">
-            <% end %>
+            <%= render 'img', item:ord.item %>
           </div>
           <div class="col-lg-3">
             <h3><%= ord.item.name %></h3>
@@ -13,7 +11,7 @@
           </div>
           
           <div class="col-lg-3">
-            <h4>quantity: <%= ord.quantity %></h4>
+            <h4>Sold quantity: <%= ord.quantity %></h4>
             <p class="size-inc">Item sold on <%= ord.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></p>
           </div>
           <div class="col-lg-3">

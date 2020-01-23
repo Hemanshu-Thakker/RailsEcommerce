@@ -1,0 +1,31 @@
+<div class="width-alt col-lg-3">
+  <div class="card extra-padding">
+    <div class="img-st-dim">
+      <% if item.item_img.attached? %>
+        <image src="<%=(  url_for(item.item_img) )%>" class="img-styling">
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title"><%= item.name %></h4>
+      <% if item.comments.exists? %>
+        <div class="display-inline3">
+          <% (1..getAverageRating(item).to_i).each do %>
+                <%= image_tag("star.png", :class => "star-img") %>
+          <% end %>
+          <% if getAverageRating(item).ceil(0)-getAverageRating(item).to_i == 1 %>
+            <%= image_tag("half-star.png", :class => "star-img") %>
+          <% end %>
+          <% (getAverageRating(item).ceil(0)+1..5).each do %>
+            <%= image_tag("star_dull.png", :class => "star-img") %>
+          <% end %>
+          <h5 class="size-inc"><%= getAverageRating(item) %> / 5</h5>
+        </div>
+      <% else %>
+        <% (1..5).each do %>
+          <%= image_tag("star_dull.png", :class => "star-img") %>
+        <% end %>
+      <% end %>
+      <h2 class="card-text">Rs. <%= item.price %></h2>
+    </div>
+  </div>
+</div>

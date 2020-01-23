@@ -5,11 +5,9 @@
         <div class="row">
           <div class="col-lg-3 img-st-dim">
             <%= link_to user_item_path(ord.user,ord.item) do %>
-              <% if ord.item.item_img.attached? %>
-                <image src="<%=(  url_for(ord.item.item_img) )%>" class="img-styling-3">
-              <% end %>
-            <% end %>
-          </div>
+              <%= render 'img', item: ord.item %>
+            <% end %> 
+          </div>          
           <div class="col-lg-3">
             <h3><%= ord.item.name %></h3>
             <h5>Rs. <%= ord.item.price %></h5>
