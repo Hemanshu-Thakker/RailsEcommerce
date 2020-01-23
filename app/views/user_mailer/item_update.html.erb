@@ -4,9 +4,27 @@
 			<div class="col-lg-12">
 				<p>Hello <%= @user.username %>!</p>
 				<p><strong>Before update:</strong></p>
-				<p><strong>Name:</strong><%= @before_item.name %></p>
-				<p><strong>Quantity:</strong><%= @before_item.quantity %></p>
-				<p><strong>Price:</strong><%= @before_item.price %></p>
+				<p><strong>Name:</strong>
+					<% if @item.saved_changes["name"]!=nil %>
+						<%= @item.saved_changes["name"][0] %>
+					<% else %>
+						<%= @item.name %>
+					<% end %>
+				</p>
+				<p><strong>Quantity:</strong>
+					<% if @item.saved_changes["quantity"]!=nil %>
+						<%= @item.saved_changes["quantity"][0] %>
+					<% else %>
+						<%= @item.quantity %>
+					<% end %>
+				</p>
+				<p><strong>Price:</strong>
+					<% if @item.saved_changes["price"] %>
+						<%= @item.saved_changes["price"][0] %>
+					<% else %>
+						<%= @item.price %>
+					<% end %>
+				</p>
 				<p><strong>After update:</strong></p>
 				<p><strong>Name:</strong><%= @item.name %></p>
 				<p><strong>Quantity:</strong><%= @item.quantity %></p>

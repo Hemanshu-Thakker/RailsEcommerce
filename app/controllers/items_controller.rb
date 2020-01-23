@@ -62,7 +62,8 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1.json
   def update
     @item= Item.find(params[:id])
-    before_item= Item.find(params[:id])
+      # @item.item_to_send_mail= @item
+      # @item.user_to_send_mail= current_user
     respond_to do |format|
       if @item.update(item_params)
         # UserMailer.item_update(current_user,before_item,@item).deliver

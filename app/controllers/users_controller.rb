@@ -59,19 +59,20 @@ class UsersController < ApplicationController
   end
 
   #dispaly users sold products
-  def sold                      
-    @orders=Order.joins(:item).where("items.user_id IN (?)",current_user.id).paginate(:page => params[:page], :per_page=>4)
+  def sold  
+    @sold_orders=Order.joins(:item).where("items.user_id IN (?)",current_user.id)                    
+    @orders=@sold_orders.order(created_at: :desc).paginate(:page => params[:page], :per_page=>4)
     # @items= @user.items.paginate(:page => params[:page], :per_page=>4)
   end
 
   # display users selling products
   def your_items
-    @items=current_user.items.paginate(:page => params[:page], :per_page=>4)
+    @items=current_user.items.order(created_at: :desc).paginate(:page => params[:page], :per_page=>4)
   end
 
   #display bought products
   def orders
-    @orders= current_user.orders.reverse().paginate(:page => params[:page], :per_page=>4)
+    @orders= current_user.orders.order(created_at: :desc).paginate(:page => params[:page], :per_page=>4)
   end
 
   # Add money to your account
