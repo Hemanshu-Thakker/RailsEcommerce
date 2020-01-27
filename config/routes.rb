@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'validate_user' => 'sessions#validate_user'
   get 'update_password/:id' => 'sessions#update_password'
   post 'update_password/:id' => 'sessions#update_password', as: 'update_password'
-  get 'email_validate' => 'sessions#email_validate'
+  get 'email_validate/:id' => 'sessions#email_validate', as: 'email_validate'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
