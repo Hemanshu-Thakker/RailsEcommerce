@@ -1,5 +1,7 @@
 <section class="sandwich">
 	<div>
-		<p>To Verify User click <%= link_to "here", email_validate_url %></p>
+		<p>Dear <%= @user.username %></p>
+		<%= binding.pry %>
+		<p>To Verify user click <%= link_to "here", email_validate_url(ActiveSupport::MessageEncryptor.new(ENV['KEY']).encrypt_and_sign(@user.id.to_s))  %> </p>
 	</div>	
 </section>

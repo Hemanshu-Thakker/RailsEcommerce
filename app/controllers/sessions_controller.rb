@@ -58,8 +58,12 @@ class SessionsController < ApplicationController
   end
 
   def email_validate
-    current_user.update(validate_user: true)
-    redirect_to user_items_path(current_user)
+    @user= User.find(
+      ActiveSupport::MessageEncryptor.new(ENV['KEY']).decrypt_and_verify(params[:id])
+      )
+    session[:user_id] = @user.id
+    @user.update(validate_user: true)
+    redirect_to user_items_path(@user)
   end
 
   def destroy

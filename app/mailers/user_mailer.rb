@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+	
 	def buyer_confirmation(user)
 		@user= user
 		mail(to: @user.email, subject: "Product succesfully bought")
@@ -18,6 +19,7 @@ class UserMailer < ApplicationMailer
 	end
 	def email_validate(user)
 		@user=user
+		binding.pry
 		mail(to: @user.email, subject: "Validate User")
 	end
 end
