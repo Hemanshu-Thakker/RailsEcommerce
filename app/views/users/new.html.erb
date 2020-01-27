@@ -2,5 +2,8 @@
 	<div class="form-base-styling">
 		<%= render 'form', user: @user %>
 		<%= link_to 'Back', login_path, :class => "label-style" %>
+		<div class="alert">
+			<%= flash[:notice] %>
+		</div>
 	</div>
 </section>

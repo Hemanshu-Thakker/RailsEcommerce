@@ -8,13 +8,16 @@ class UserMailer < ApplicationMailer
 		mail(to: @user.email, subject: "Product succesfully sold")
 	end
 	def item_update(user,item)
-		binding.pry
 		@user=user
 		@item= item
-		mail(to: @user.email, subject: "Item updated")
+		# mail(to: @user.email, subject: "Item updated")
 	end
 	def password_reseter(user)
 		@user=user
 		mail(to: @user.email, subject: "Password Reset")
+	end
+	def email_validate(user)
+		@user=user
+		mail(to: @user.email, subject: "Validate User")
 	end
 end
