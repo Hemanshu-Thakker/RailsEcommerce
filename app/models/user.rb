@@ -4,10 +4,16 @@ class User < ApplicationRecord
 	has_many :orders, :dependent => :delete_all
 	has_many :comments, :dependent => :delete_all
 
+	after_create :send_validate_email_to_user
+
 	validates :username, presence: true, uniqueness: true
 	validates :password_digest, presence:true, length: { minimum: 5 }
 
 	EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+
+	def send_validate_email_to_user
+		UserMailer.email_validate(self).deliver
+	end
 
 	def buy(item,quant)
 		standard_user=self

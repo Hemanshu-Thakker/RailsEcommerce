@@ -15,7 +15,6 @@ class Item < ApplicationRecord
   validates :quantity, presence: true
 
   def send_email_to_user
-  	binding.pry
   	UserMailer.item_update(self.user,self).deliver
   end
 

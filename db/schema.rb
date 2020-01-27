@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(version: 2020_01_21_090937) do
     t.string "username"
     t.string "password_digest"
     t.integer "balance"
+    t.boolean "validate_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
-    t.boolean "active"
   end
 
 end

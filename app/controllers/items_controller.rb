@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items= Item.where.not(user_id: current_user.id).where(active: true).paginate(:page => params[:page], :per_page=>8)
+    # authorize @items
   end
 
   #Search index page
@@ -47,6 +48,7 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = current_user.items.create(item_params)
+    authorize @item
     respond_to do |format|
       if @item.save
         format.html { redirect_to user_items_path(current_user) }
@@ -90,6 +92,7 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
+      authorize @item
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

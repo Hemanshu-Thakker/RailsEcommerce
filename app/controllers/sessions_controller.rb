@@ -57,6 +57,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def email_validate
+    current_user.update(validate_user: true)
+    redirect_to user_items_path(current_user)
+  end
+
   def destroy
   	session[:user_id] = nil
     redirect_to login_path, notice: "Logged out!"

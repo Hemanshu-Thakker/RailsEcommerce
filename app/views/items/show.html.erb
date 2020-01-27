@@ -1,9 +1,7 @@
 <section class="container">
   <div class="row sandwich">
     <div class="col-lg-6">
-      <% if @item.item_img.attached? %>
-        <image src="<%=(  url_for(@item.item_img) )%>" class="img-styling-2">
-      <% end %>
+      <%= render 'img-big', item: @item %>
     </div>
     <div class="col-lg-6">
       <h4>
@@ -87,28 +85,7 @@
         </div>
         <div class="sandwich">  
             <% @item.comments.each do |cmt| %>
-              <div class="cmt-styling">
-                <div class="display-inline2">
-                  <h4 class="heading-cmt"><%= cmt.user.username %></h4>
-                  <% if @item.orders.exists?(user_id: cmt.user.id, item_id: cmt.item.id) %>
-                    <span class="redit">*verified purchase</span>
-                  <% end %>
-                </div>
-                <div class="display-inline3">
-                  <% (1..cmt.rating.to_i).each do %>
-                    <%= image_tag("star.png", :class => "star-img") %>
-                  <% end %>
-                  <% if cmt.rating.ceil(0)-cmt.rating.to_i == 1 %>
-                    <%= image_tag("half-star.png", :class => "star-img") %>
-                  <% end %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <h5 class="size-inc"><%= cmt.rating %> out of 5</h5>
-                </div>
-                <div class="">
-                  <h5><%= cmt.body %></h5>
-                  <span>Comment created on <%= cmt.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></span>
-                </div>
-              </div>
+              <%= render 'comment', cmt: cmt %>
             <% end %>
         </div>
       </div>
