@@ -1,0 +1,43 @@
+<section class="container sandwich">
+	<% if @cart.added_items.empty? %>
+		<h2>Cart is Empty !!</h2>
+		<%= link_to "Back", user_items_path(current_user) %> 
+	<% else %>
+		<% @cart.added_items.each do |id,quantity| %> 
+			<div class="row soldrow-styling2">
+				<div class="col-lg-3 img-st-dim">
+					<%= link_to user_item_path(getCurrentUser,getItem(id)) do %>	              		
+	              		<% if getItem(id)	.item_img.attached? %>
+							<image src="<%=(  url_for(getItem(id).item_img) )%>" class="img-styling">
+						<% end %>
+	            	<% end %> 
+				</div>
+				<div class="col-lg-3">
+					<h3><%= getItem(id).name %></h3>
+					<h5>Rs.<%= getItem(id).price %></h5>
+					<div class="display-inline">
+						<h6>Sold by <%= getItem(id).user.username %></h6>
+						<h6 class="green-alert">In stock</h6>
+					</div>
+					<%= form_with(url: user_item_orders_path(getCurrentUser,getItem(id)), method:"post" , local: true) do |form| %>
+				        <% if @order.errors.any? %>
+				          <div id="error_explanation">
+				            <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+				            <ul>
+				            <% @order.errors.full_messages.each do |message| %>
+				              <li><%= message %></li>
+				            <% end %>
+				            </ul>
+				          </div>
+				        <% end %>
+				        <h6>Quantity : <%= form.number_field :quantity, value: quantity, :class=>"rat-st" %></h6>
+				    	<div class="display-inline">
+							<%= link_to "Remove" , remove_item_path(getItem(id),id), :class=>"size-inc2" %>  
+							<%= form.submit "Buy", :class=>"left-margin" %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</section>

@@ -39,7 +39,7 @@
         <%= @item.user.username %>
       </h6>
 
-      <%= form_with(model: @order, url: user_item_orders_path(getCurrentUser,@item) , local: true) do |form| %>
+      <%= form_with(url: user_cart_path(getCurrentUser,@item), method:"patch" , local: true) do |form| %>
         <% if @order.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -52,8 +52,11 @@
         <% end %>
         <%= form.number_field :quantity, placeholder: " Quantity " %>
         
-        <%= form.submit "Buy" %> |  
+        <%= form.submit "Add to Cart" %> |  
         <%= link_to 'Back', user_items_path %>
+        <div class="alert">
+          <%= flash[:notice] %>
+        </div>
         
       <% end %>
     </div>
@@ -76,7 +79,7 @@
               </div>
             <% end %>
             <div class="display-inline">
-              <%= form.text_field :body, placeholder: " Comment " %>&nbsp;&nbsp;&nbsp;
+              <%= form.text_area :body, placeholder: " Comment ", size: "24x1.5" %>&nbsp;&nbsp;&nbsp;
               <%= form.number_field :rating, step: :any, :class => "rat-st" %>&nbsp;<span class="rat-st2">/5</span>&nbsp;&nbsp;&nbsp;
               <br>
               <%= form.submit "Add" %>

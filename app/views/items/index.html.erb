@@ -1,15 +1,15 @@
 <section class="container-fluid">
   <div class="search-styling sandwich">
-    <%= form_with(url: search_path , local: true ) do |form| %>
-      <%= form.text_field :search %>
-      <%= form.submit "Search" %>
+    <%= form_with(url: search_path , local: true , method:"get" ) do |form| %>
+      <%= form.search_field :search, placeholder: "Search" %>
+      <%# = form.submit "Search" %>
     <% end %>
   </div>
 </section>
 
 <section class="container sandwich">
   
-  <div class="row sandwich">
+  <div class="row sandwich index-just">
     <% @items.each do |item| %>
       <% if item.user != @user %>
         <%= link_to user_item_path(getCurrentUser,item) do %>

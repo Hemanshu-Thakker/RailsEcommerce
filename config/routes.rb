@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
   resources :users do 
+    resources :carts
   	resources :items do
   		resources :orders
       resources :comments
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   get 'update_password/:id' => 'sessions#update_password'
   post 'update_password/:id' => 'sessions#update_password', as: 'update_password'
   get 'email_validate/:id' => 'sessions#email_validate', as: 'email_validate'
+  get 'remove_item/:id/:key' => 'carts#remove_item', as: 'remove_item'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	has_many :items , :dependent => :delete_all
 	has_many :orders, :dependent => :delete_all
 	has_many :comments, :dependent => :delete_all
+	has_one :cart, :dependent => :delete
 
 	after_create :send_validate_email_to_user
 
