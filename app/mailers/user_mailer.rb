@@ -19,7 +19,6 @@ class UserMailer < ApplicationMailer
 	end
 	def email_validate(user)
 		@user=user
-		binding.pry
 		mail(to: @user.email, subject: "Validate User")
 	end
 end

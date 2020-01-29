@@ -52,6 +52,8 @@
  }
  .width-alt{
  	min-width: 285px!important;
+ 	padding-left: 0px;
+ 	padding-right: 0px;
  	color: #666;
  }
 
@@ -99,6 +101,12 @@
  	margin: 30px 0px;
  }
 
+ .soldrow-styling2{
+ 	padding: 25px;
+ 	border-bottom: .5px solid #eee;
+ 	margin: 30px 0px;
+ }
+
  .form-base-styling{
  	padding: 25px;
  	margin: 30px 0px;
@@ -131,6 +139,10 @@
  nav li span{
  	background-color: #008000c4!important;
  	border-color: #008000c4!important;
+ }
+
+ nav{
+ 	align-items: center;
  }
 
  .disabled{
@@ -185,6 +197,7 @@
 
  .rat-st{
  	max-width: 40px;
+ 	height: 25px;
  }
 
  .rat-st2{
@@ -221,4 +234,28 @@
 
  .opacity-change{
  	opacity: .4;
+ }
+
+ .index-just{
+ 	justify-content: space-between;
+ }
+
+ .alert{
+ 	color: red;
+ }
+
+ .cart-st{
+ 	width: 25px;
+ 	height: 25px;
+ 	margin-left: 10px;
+ 	margin-right: 10px;
+ }
+
+ .green-alert{
+ 	color: green;
+ 	margin-left: 20px;
+ }
+
+ .left-margin{
+ 	margin-left: 10px;
  }
