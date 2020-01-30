@@ -17,7 +17,9 @@
 					<h5>Rs.<%= getItem(id).price %></h5>
 					<div class="display-inline">
 						<h6>Sold by <%= getItem(id).user.username %></h6>
-						<h6 class="green-alert">In stock</h6>
+						<% if getItem(id).quantity > 0 %>
+							<h6 class="green-alert">In stock</h6>
+						<% end %>
 					</div>
 					<%= form_with(url: user_item_orders_path(getCurrentUser,getItem(id)), method:"post" , local: true) do |form| %>
 				        <% if @order.errors.any? %>
@@ -39,5 +41,13 @@
 				</div>
 			</div>
 		<% end %>
+		<div class="buyall-button">
+			<%= link_to buyall_path, method:"post" do %>
+				<div class="btn-st">
+					<h5>Proceed To buy all</h5>
+				</div>
+			<% end %>
+		</div>
+		
 	<% end %>
 </section>

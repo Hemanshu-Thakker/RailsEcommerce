@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 
 	def create
 		# render plain: params[:order].inspect
-		binding.pry
+		
 		@item= Item.find(params[:item_id])
 		@comment= Comment.new
 		@average_rating= Comment.findAverageRating(@item)

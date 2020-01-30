@@ -1,7 +1,7 @@
 <section class="container">
   <div class="row sandwich">
     <div class="col-lg-6">
-      <%= render 'img-big', item: @item %>
+      <%= render 'items/img-big', item: @item %>
     </div>
     <div class="col-lg-6">
       <h4>
@@ -40,11 +40,11 @@
       </h6>
 
       <%= form_with(url: user_cart_path(getCurrentUser,@item), method:"patch" , local: true) do |form| %>
-        <% if @order.errors.any? %>
+        <% if @cart.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+            <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this order from being saved:</h2>
             <ul>
-            <% @order.errors.full_messages.each do |message| %>
+            <% @cart.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
             </ul>
@@ -54,7 +54,7 @@
         
         <%= form.submit "Add to Cart" %> |  
         <%= link_to 'Back', user_items_path %>
-        <div class="alert">
+        <div class="alert alert-green">
           <%= flash[:notice] %>
         </div>
         

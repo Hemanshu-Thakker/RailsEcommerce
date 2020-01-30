@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @item= Item.find(params[:id])
-    @order= Order.new
+    @cart=current_user.cart
     @comment= Comment.new
   end
 
