@@ -16,7 +16,7 @@
           <% (getAverageRating(item).ceil(0)+1..5).each do %>
             <%= image_tag("star_dull.png", :class => "star-img") %>
           <% end %>
-          <h5 class="size-inc"><%= getAverageRating(item) %> / 5</h5>
+          <span class="size-inc"><%= getAverageRating(item) %> / 5</span>
         </div>
       <% else %>
         <% (1..5).each do %>

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   post 'update_password/:id' => 'sessions#update_password', as: 'update_password'
   get 'email_validate/:id' => 'sessions#email_validate', as: 'email_validate'
   get 'remove_item/:id/:key' => 'carts#remove_item', as: 'remove_item'
+  post 'buyall' => 'carts#buyall'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
