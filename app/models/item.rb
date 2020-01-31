@@ -13,6 +13,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
   validates :quantity, presence: true
+  validates_numericality_of :quantity, :only_integer => true, :greater_than_or_equal_to => 0
 
   def send_email_to_user
   	UserMailer.item_update(self.user,self).deliver
