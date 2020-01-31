@@ -39,7 +39,9 @@
         <%= @item.user.username %>
       </h6>
 
-      <%= form_with(url: user_cart_path(getCurrentUser,@item), method:"patch" , local: true) do |form| %>
+
+      <!-- FORM TO GET QUANTITY -->
+      <%= form_with(url: user_item_cart_orders_path(getCurrentUser,@item), method: "post" , local: true) do |form| %>
         <% if @cart.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -50,7 +52,7 @@
             </ul>
           </div>
         <% end %>
-        <%= form.number_field :quantity, placeholder: " Quantity " %>
+        <%= form.number_field :quantity, in: 1..@item.quantity, placeholder: " Quantity ", :class=>"quantity-st" %>
         
         <%= form.submit "Add to Cart" %> |  
         <%= link_to 'Back', user_items_path %>
