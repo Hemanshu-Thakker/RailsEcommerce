@@ -52,6 +52,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     current_user.destroy
+    current_user.cart.destroy
     session[:user_id] = nil
     respond_to do |format|
       format.html { redirect_to login_path, notice: 'User was successfully destroyed.' }

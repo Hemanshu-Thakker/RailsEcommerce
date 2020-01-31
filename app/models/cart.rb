@@ -1,4 +1,4 @@
 class Cart < ApplicationRecord
-	serialize :added_items, Hash
-	belongs_to :user 
+	belongs_to :user
+	has_many :cart_order
 end

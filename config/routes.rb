@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   default_url_options :host => "localhost", :port => "3000"
 
   root 'sessions#new'
-  resources :users do 
+  resources :users do
     resources :carts
   	resources :items do
+      resources :cart_orders
   		resources :orders
       resources :comments
   	end
@@ -31,6 +32,12 @@ Rails.application.routes.draw do
   get 'email_validate/:id' => 'sessions#email_validate', as: 'email_validate'
   get 'remove_item/:id/:key' => 'carts#remove_item', as: 'remove_item'
   post 'buyall' => 'carts#buyall'
+  get 'users/:user_id/cart_orders' => 'cart_orders#show', as: 'order_confirmation'
+
+  # cart_orders
+  # post 'users/:user_id/cart_orders/:item_id' => 'cart_orders#create'
+  # get 'users/:user_id/cart_orders/:item_id' => 'cart_orders#index', as: 'user_cart_order'
+  # get 'users/:user_id/cart_orders' => 'cart_orders#show', as: 'user_cart_orders'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
