@@ -3,16 +3,18 @@
 		<h2>Cart is Empty !!</h2>
 		<%= link_to "Back", user_items_path(current_user) %> 
 	<% else %>
+	<div class="row">
+		<div class="col-lg-9">
 		<% @cart.cart_order.each do |ord| %> 
 			<div class="row soldrow-styling2">
-				<div class="col-lg-3 img-st-dim">
+				<div class="col-lg-6 img-st-dim">
 					<%= link_to user_item_path(getCurrentUser,getItem(ord.item_id)) do %>	              		
 	              		<% if getItem(ord.item_id).item_img.attached? %>
 							<image src="<%=(  url_for(getItem(ord.item_id).item_img) )%>" class="img-styling">
 						<% end %>
 	            	<% end %> 
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<h3><%= getItem(ord.item_id).name %></h3>
 					<h5>Rs.<%= getItem(ord.item_id).price %></h5>
 					<div class="display-inline">
@@ -41,14 +43,21 @@
 				</div>
 			</div>
 		<% end %>
-		<div class="buyall-button">
-			<%= link_to buyall_path, method:"post" do %>
-				<div class="btn-st">
-					<h5>Proceed To buy all</h5>
-				</div>
-			<% end %>
-
 		</div>
-		
+		<div class="col-lg-3">
+			<div class="img-st-dim">
+				<div class="buyall-button">
+					<%= link_to buyall_path, method:"post" do %>
+						<div class="btn-st">
+							<h5>Proceed To buy all</h5>
+						</div>
+					<% end %>
+				</div>
+				<div class="">
+					<span class="label-style">Order Total : Rs.<%= getTotal %></span>
+				</div>
+			</div>	
+		</div>
+	</div>
 	<% end %>
 </section>

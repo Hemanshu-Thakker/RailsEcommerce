@@ -18,11 +18,9 @@ class CartsController < ApplicationController
 			else
 				@order=Order.create(user_id: current_user.id, item_id: ord.item_id, quantity: ord.quantity)
 				if current_user.buy(ord.item,ord.quantity.to_i)
-					# ord.destroy
+					ord.destroy
 				else
 					@order.destroy
-					#redirect to error page
-					# redirect_to user_item_path(current_user['id'],@item['id'])
 				end
 			end
 		end
