@@ -129,6 +129,7 @@
  	padding: 15px;
  	background-color: green;
  	color: white;
+ 	font-size: 25px;
  }
 
  .btn-st:hover{
@@ -246,6 +247,7 @@
 
  .alert-green{
  	color: green;
+ 	background: #00800045
  }
 
  .cart-st{
@@ -266,12 +268,13 @@
  }
 
  .buyall-button{
- 	width: 200px;
- 	height: 50px;
+ 	width: 100%;
+ 	/*height: 50px;*/
+ 	padding: 10px 0px;
  	text-align: center;
  	/*margin-top: 30px;*/
  	/*margin-bottom: 30px;*/
- 	margin: 30px auto;
+ 	margin: 20px auto;
  }
 
  .quantity-st{
@@ -281,3 +284,25 @@
  	margin-top: 10px;
  }
 
+ .coupon-input{
+ 	border: none;
+    border-bottom: 2px solid green;
+    width: 100%;
+    height: 40px;
+    outline: 0px;
+    font-size: 15px;
+ }
+
+ .coupon-input:focus{
+ 	background: #00800045 ;
+ }
+
+ .coupon-form{
+ 	margin: 20px 0px;
+ }
+
+ /*.extra-style{
+ 	width: 100%;
+ 	padding: 10px ;
+ 	background: #00800045;
+ }*/

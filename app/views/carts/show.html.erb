@@ -5,7 +5,7 @@
 	<% else %>
 	<div class="row">
 		<div class="col-lg-9">
-		<% @cart.cart_order.each do |ord| %> 
+		<% @cart_items.each do |ord| %> 
 			<div class="row soldrow-styling2">
 				<div class="col-lg-6 img-st-dim">
 					<%= link_to user_item_path(getCurrentUser,getItem(ord.item_id)) do %>	              		
@@ -16,7 +16,7 @@
 				</div>
 				<div class="col-lg-6">
 					<h3><%= getItem(ord.item_id).name %></h3>
-					<h5>Rs.<%= getItem(ord.item_id).price %></h5>
+					<h5>Rs.<%= ord.item.price %>&nbsp;x&nbsp;<%= ord.quantity %></h5>
 					<div class="display-inline">
 						<h6>Sold by <%= getItem(ord.item_id).user.username %></h6>
 						<% if getItem(ord.item_id).quantity > 0 %>
@@ -37,7 +37,8 @@
 				        <span class="size-inc">Quantity : <%= form.number_field :quantity, value: ord.quantity, in: 1..ord.item.quantity, :class=>"rat-st" %><%= form.submit "save", :class=>"left-margin" %>
 				        </span>
 				    	<div class="display-inline marg-top">
-							<%= link_to "Remove" , user_item_cart_order_path(getCurrentUser.id,ord.item_id,ord.id), :class=>"size-inc2", method: "delete" %>  
+							<%= link_to "Remove" , user_item_cart_order_path(getCurrentUser.id,ord.item_id,ord.id), :class=>"size-inc2", method: "delete" %>&nbsp;&nbsp;|&nbsp;&nbsp;
+							<%= link_to "Save for later" , "/users/#{getCurrentUser.id}/update_in_cart/#{ord.id}", :class=>"size-inc2"  %>
 						</div>
 					<% end %>
 				</div>
@@ -45,18 +46,78 @@
 		<% end %>
 		</div>
 		<div class="col-lg-3">
-			<div class="img-st-dim">
-				<div class="buyall-button">
-					<%= link_to buyall_path, method:"post" do %>
-						<div class="btn-st">
-							<h5>Proceed To buy all</h5>
-						</div>
-					<% end %>
-				</div>
+			<% if @cart_items.empty? == false %>
 				<div class="">
-					<span class="label-style">Order Total : Rs.<%= getTotal %></span>
+					<div class="buyall-button">
+						<%= link_to buyall_path, method:"post" do %>
+							<div class="btn-st">
+								<span>Proceed To buy all</span>
+							</div>
+						<% end %>
+					</div>
+					<div class="">
+						<span class="label-style">Order Total : Rs.<%= getTotal %></span>
+					</div>
+					<% if getCartOrders == true %>
+					<div class="coupon-form">
+						<%= form_with(url: apply_coupon_path(getCurrentUser) , local: true , method:"post", :class=>"form-coupon" ) do |form| %>
+      						<%= form.search_field :value, placeholder: "Enter Coupon", :class=>"coupon-input" %>
+    					<% end %>
+					</div>
+					<% else %>
+					<div class="">
+						<span class="label-style">Discounted Total : Rs.<%= @discounted_total %></span>
+					</div>
+					<div class="alert-green buyall-button">
+						<%= flash[:notice] %>
+					</div>
+					<% end %>
+				</div>	
+			<% end %>
+		</div>
+	</div>
+	<h3>Saved for later</h3>
+	<div class="row">
+		<div class="col-lg-9">
+			<% @saved_items.each do |ord| %> 
+				<div class="row soldrow-styling2">
+					<div class="col-lg-6 img-st-dim">
+						<%= link_to user_item_path(getCurrentUser,getItem(ord.item_id)) do %>	              		
+		              		<% if getItem(ord.item_id).item_img.attached? %>
+								<image src="<%=(  url_for(getItem(ord.item_id).item_img) )%>" class="img-styling">
+							<% end %>
+		            	<% end %> 
+					</div>
+					<div class="col-lg-6">
+						<h3><%= getItem(ord.item_id).name %></h3>
+						<h5>Rs.<%= getItem(ord.item_id).price %></h5>
+						<div class="display-inline">
+							<h6>Sold by <%= getItem(ord.item_id).user.username %></h6>
+							<% if getItem(ord.item_id).quantity > 0 %>
+								<h6 class="green-alert">In stock</h6>
+							<% end %>
+						</div>
+						<%= form_with(url: user_item_cart_order_path(getCurrentUser,getItem(ord.item_id),ord.id), method:"patch" , local: true) do |form| %>
+					        <% if @cart.errors.any? %>
+					          <div id="error_explanation">
+					            <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this order from being saved:</h2>
+					            <ul>
+					            <% @cart.errors.full_messages.each do |message| %>
+					              <li><%= message %></li>
+					            <% end %>
+					            </ul>
+					          </div>
+					        <% end %>
+					        <span class="size-inc">Quantity : <%= form.number_field :quantity, value: ord.quantity, in: 1..ord.item.quantity, :class=>"rat-st" %><%= form.submit "save", :class=>"left-margin" %>
+					        </span>
+					    	<div class="display-inline marg-top">
+								<%= link_to "Remove" , user_item_cart_order_path(getCurrentUser.id,ord.item_id,ord.id), :class=>"size-inc2", method: "delete" %>&nbsp;&nbsp;|&nbsp;&nbsp;
+								<%= link_to "Add to cart" , "/users/#{getCurrentUser.id}/update_in_cart/#{ord.id}", :class=>"size-inc2" %>
+							</div>
+						<% end %>
+					</div>
 				</div>
-			</div>	
+			<% end %>
 		</div>
 	</div>
 	<% end %>
