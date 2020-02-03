@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_30_104349) do
+ActiveRecord::Schema.define(version: 2020_02_03_133118) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -37,9 +37,14 @@ ActiveRecord::Schema.define(version: 2020_01_30_104349) do
     t.integer "cart_id"
     t.integer "item_id"
     t.integer "quantity"
+    t.boolean "in_cart", default: true
+    t.float "price_discounted"
+    t.float "price"
+    t.integer "coupon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_orders_on_cart_id"
+    t.index ["coupon_id"], name: "index_cart_orders_on_coupon_id"
     t.index ["item_id"], name: "index_cart_orders_on_item_id"
   end
 
@@ -61,6 +66,13 @@ ActiveRecord::Schema.define(version: 2020_01_30_104349) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string "value"
+    t.float "discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "itemorders", force: :cascade do |t|
     t.integer "item_id"
     t.integer "order_id"
@@ -76,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_104349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active"
+    t.boolean "in_cart", default: true
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -85,6 +98,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_104349) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "price"
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

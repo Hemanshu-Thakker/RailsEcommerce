@@ -33,6 +33,12 @@ Rails.application.routes.draw do
   get 'remove_item/:id/:key' => 'carts#remove_item', as: 'remove_item'
   post 'buyall' => 'carts#buyall'
   get 'users/:user_id/cart_orders' => 'cart_orders#show', as: 'order_confirmation'
+  patch 'users/:user_id/update_in_cart/:id' => 'cart_orders#update_in_cart'
+  get 'users/:user_id/update_in_cart/:id' => 'cart_orders#update_in_cart'
+
+  # coupons controller paths
+  post 'users/:user_id/apply' => 'coupons#apply'
+  get 'users/:user_id/apply' => 'coupons#apply', as: 'apply_coupon'
 
   # cart_orders
   # post 'users/:user_id/cart_orders/:item_id' => 'cart_orders#create'
