@@ -48,7 +48,6 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = current_user.items.create(item_params)
-    binding.pry
     authorize @item
     respond_to do |format|
       if @item.save

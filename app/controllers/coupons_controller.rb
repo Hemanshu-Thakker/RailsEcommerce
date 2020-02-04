@@ -4,7 +4,7 @@ class CouponsController < ApplicationController
 		@cart= current_user.cart
 		@coupon= Coupon.find_by_value(params[:value])
 		@cart.cart_order.where(in_cart: true).update_all(coupon_id: @coupon.id)
-		@cart.cart_order.where(in_cart: true).each do | ord |
+		@cart.cart_order.where(in_cart: true).find_each do | ord |
 			price= ord.price-(@coupon.discount/100)*ord.price
 			ord.update(price_discounted: price)
 		end

@@ -79,7 +79,7 @@
             <% end %>
             <div class="display-inline">
               <%= form.text_area :body, placeholder: " Comment ", size: "24x1.5" %>&nbsp;&nbsp;&nbsp;
-              <%= form.number_field :rating, step: :any, :class => "rat-st" %>&nbsp;<span class="rat-st2">/5</span>&nbsp;&nbsp;&nbsp;
+              <%= form.number_field :rating, in: 1..5, step: :any, :class => "rat-st" %>&nbsp;<span class="rat-st2">/5</span>&nbsp;&nbsp;&nbsp;
               <br>
               <%= form.submit "Add" %>
             </div>  

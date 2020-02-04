@@ -22,7 +22,7 @@ class CartsController < ApplicationController
 	end
 	def buyall
 		@cart=current_user.cart
-		@cart.cart_order.where(in_cart: true).each do |ord|
+		@cart.cart_order.where(in_cart: true).find_each do |ord|
 			if ord.quantity=="" or ord.quantity == nil
 				@cart.errors.add(:quantity, "is invalid")
 				render 'show'
