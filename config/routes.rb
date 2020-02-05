@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  default_url_options :host => "localhost", :port => "3000"
-
   root 'sessions#new'
   resources :users do
     resources :carts
