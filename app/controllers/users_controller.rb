@@ -23,6 +23,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         Cart.create(user_id: @user.id)
+        # for temporary purpose
+        @user.update(validate_user: true)
+        # for temporary purpose
         flash[:notice]= "Validation link sent to your mail"
         format.html { render :new }
         # format.json { render :show, status: :created, location: @user }

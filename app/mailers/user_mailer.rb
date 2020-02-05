@@ -15,10 +15,10 @@ class UserMailer < ApplicationMailer
 	end
 	def password_reseter(user)
 		@user=user
-		mail(to: @user.email, subject: "Password Reset")
+		#mail(to: @user.email, subject: "Password Reset")
 	end
 	def email_validate(user)
 		@user=user
-		mail(to: @user.email, subject: "Validate User")
+		#mail(to: @user.email, subject: "Validate User")
 	end
 end
