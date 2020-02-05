@@ -13,21 +13,22 @@
  *= require_tree .
  *= require_self
  */
+ .container-fluid{
+ 	padding: 0px!important;
+ }
 
  .overall-alteration {
  	margin: 0px;
  }
  .fonty{
  	font-size: 18px;
- 	margin-left: 4px;
- 	margin-right: 4px;
- 	padding: 4px;
- 	color: #666;
+ 	padding-left: 10px;
+ 	color: #666!important;
  }
  .fonty:hover{
  	text-decoration: none;
  	background-color: green;
- 	color: white;
+ 	color: white!important;
  }
 
  .nav-stling{
@@ -38,8 +39,14 @@
 
  .extra-effect{
  	background-color: green;
- 	color: white;
+ 	color: white!important;
  	border-radius: 5px;
+ }
+
+ .show{
+ 	z-index: 99;
+ 	background-color: #feffff;
+ 	border: 1px solid #ccc;
  }
 
  .extra-padding{
@@ -301,8 +308,6 @@
  	margin: 20px 0px;
  }
 
- /*.extra-style{
- 	width: 100%;
- 	padding: 10px ;
- 	background: #00800045;
+ /*.like-container{
+ 	margin: 0px 200px;
  }*/
