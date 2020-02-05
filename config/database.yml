@@ -27,6 +27,6 @@ test:
   <<: *default
   database: ecomdb_test
 
-production:
-  <<: *default
-  database: ecomdb_production 
+# production:
+#   <<: *default
+#   database: ecomdb_production 
