@@ -10,7 +10,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
     
   #set host by default  
-  config.action_mailer.default_url_options = { :host => "localhost:3000/" }  
+  config.action_mailer.default_url_options = { :host => "localhost" , :port => "3000"}
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -66,7 +66,6 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'example.com',
     user_name:            'lessecureheman@gmail.com',
     password:             Rails.application.credentials[:password],
     authentication:       'plain',
