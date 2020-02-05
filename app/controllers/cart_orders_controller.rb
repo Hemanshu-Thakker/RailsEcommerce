@@ -4,8 +4,10 @@ class CartOrdersController < ApplicationController
 	end
 	def show
 		@cart=current_user.cart
-		@cart_orders=@cart.cart_order
-		@cart.cart_order.where(in_cart: true).destroy_all
+		@cart_orders=@cart.cart_order.where(in_cart: true)
+		item_count=@cart_orders.count
+		@orders=current_user.orders.order(:created_at).last(item_count)
+		@cart_orders.destroy_all
 	end
 	def create
 		@cart=current_user.cart
