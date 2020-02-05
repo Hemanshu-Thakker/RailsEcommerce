@@ -31,7 +31,7 @@ Rails.application.configure do
 
   # mailer
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => "ecom-rails-recommender" } #=> Or https://www.example.com
+  config.action_mailer.default_url_options = { :host => "https://ecom-rails-recommender.herokuapp.com" } #=> Or https://www.example.com
   config.action_mailer.perform_deliveries = true
 
   ActionMailer::Base.smtp_settings = {
