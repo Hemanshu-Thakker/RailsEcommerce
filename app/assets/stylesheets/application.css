@@ -55,7 +55,7 @@
  }
 
  a:hover{
- 	text-decoration: none;
+ 	text-decoration: none!important;
  }
  .width-alt{
  	min-width: 284px!important;
