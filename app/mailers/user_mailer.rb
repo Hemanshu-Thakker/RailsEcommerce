@@ -2,6 +2,7 @@ class UserMailer < ApplicationMailer
 	
 	def buyer_confirmation(user)
 		@user= user
+		attachments.inline["giphy.gif"]=File.read("#{Rails.root}/app/assets/images/giphy.gif")
 		mail(to: @user.email, subject: "Product succesfully bought")
 	end
 	def seller_confirmation(user)

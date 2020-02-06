@@ -9,9 +9,7 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
     
-  #set host by default  
-  config.action_mailer.default_url_options = { :host => "localhost" , :port => "3000"}
-
+  
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
 
@@ -53,12 +51,17 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  config.action_mailer.delivery_method = :sendmail
+  
   # Defaults to:
   # config.action_mailer.sendmail_settings = {
   #   location: '/usr/sbin/sendmail',
   #   arguments: '-i'
   # }
+
+  #set host by default  
+  config.action_mailer.default_url_options = { :host => "localhost" , :port => "3000"}
+
+  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 

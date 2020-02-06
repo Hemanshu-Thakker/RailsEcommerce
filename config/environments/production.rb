@@ -30,20 +30,22 @@ Rails.application.configure do
   config.assets.compile = false
 
   # mailer
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => "https://ecom-rails-recommender.herokuapp.com" } #=> Or https://www.example.com
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { :host => "ecom-rails-recommender.herokuapp.com"}
 
-  ActionMailer::Base.smtp_settings = {
-    :user_name => 'lessecureheman@gmail.com',
-    :password => Rails.application.credentials[:password],
-    :domain => 'herokuapp.com',
-    :address => 'smtp.gmail.com',
-    :port => 321,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            'lessecureheman@gmail.com',
+    password:             Rails.application.credentials[:password],
+    authentication:       'plain',
+    enable_starttls_auto: true 
+  }
+
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
