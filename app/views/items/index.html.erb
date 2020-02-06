@@ -10,11 +10,9 @@
   
   <div class="row sandwich index-just">
     <% @items.each do |item| %>
-      <% if item.user != @user %>
-        <%= link_to user_item_path(getCurrentUser,item) do %>
-          <% render 'card', item: item %>
-        <% end %>
-      <% end %>  
+      <%#= link_to user_item_path(getCurrentUser,item) do %>
+        <%= render 'card', item: item %>
+      <%# end %>
     <% end %>
   </div>
   <%= will_paginate @items, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>

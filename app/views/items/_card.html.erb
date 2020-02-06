@@ -1,29 +1,33 @@
 <div class="width-alt col-lg-3">
   <div class="card extra-padding">
     <div class="img-st-dim">
-      <%= render 'img', item: item %>
+      <%= link_to user_item_path(getCurrentUser,item) do %>
+        <%= render 'img', item: item %>
+      <% end %>
     </div>
     <div class="card-body">
-      <h4 class="card-title"><%= item.name %></h4>
-      <% if item.comments.exists? %>
-        <div class="display-inline3">
-          <% (1..getAverageRating(item).to_i).each do %>
-                <%= image_tag("star.png", :class => "star-img") %>
-          <% end %>
-          <% if getAverageRating(item).ceil(0)-getAverageRating(item).to_i == 1 %>
-            <%= image_tag("half-star.png", :class => "star-img") %>
-          <% end %>
-          <% (getAverageRating(item).ceil(0)+1..5).each do %>
+        <%= link_to user_item_path(getCurrentUser,item) do %>
+            <h4 class="card-title"><%= item.name %></h4>
+        <% end %>
+        <% if item.comments.exists? %>
+            <div class="display-inline3">
+                <% (1..getAverageRating(item).to_i).each do %>
+                      <%= image_tag("star.png", :class => "star-img") %>
+                <% end %>
+                <% if getAverageRating(item).ceil(0)-getAverageRating(item).to_i == 1 %>
+                  <%= image_tag("half-star.png", :class => "star-img") %>
+                <% end %>
+                <% (getAverageRating(item).ceil(0)+1..5).each do %>
+                  <%= image_tag("star_dull.png", :class => "star-img") %>
+                <% end %>
+                <span class="size-inc"><%= getAverageRating(item) %> / 5</span>
+            </div>
+        <% else %>
+          <% (1..5).each do %>
             <%= image_tag("star_dull.png", :class => "star-img") %>
           <% end %>
-          <span class="size-inc"><%= getAverageRating(item) %> / 5</span>
-        </div>
-      <% else %>
-        <% (1..5).each do %>
-          <%= image_tag("star_dull.png", :class => "star-img") %>
         <% end %>
-      <% end %>
-      <h2 class="card-text">Rs. <%= item.price %></h2>
+        <h2 class="card-text">Rs. <%= item.price %></h2>
     </div>
   </div>
 </div>
