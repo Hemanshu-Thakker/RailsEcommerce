@@ -18,13 +18,15 @@
             <p class="size-inc">Added on <%= item.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></p>
           </div>
           <div class="col-lg-3 img-st-dim">
-            <div class="button-style size-inc">
-              <span class="size-inc2">Read Review</span>
-            </div>
+            <%= link_to user_item_path(getCurrentUser,item) , method: "delete" do %>
+              <div class="button-style size-inc">
+                <span class="size-inc2">Remove</span>
+              </div>
+            <% end %>
             <%= link_to edit_user_item_path(item.user,item) do %>
-            <div class="button-style size-inc">
-              <span class="size-inc2">Edit</span>
-            </div>
+              <div class="button-style size-inc">
+                <span class="size-inc2">Edit</span>
+              </div>
             <% end %>
           </div>
         </div>
@@ -46,13 +48,15 @@
               <p class="size-inc">Added on <%= item.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></p>
             </div>
             <div class="col-lg-3 img-st-dim">
-              <div class="button-style size-inc">
-                <span class="size-inc2">Read Review</span>
-              </div>
+              <%= link_to user_item_path(getCurrent_user,item), method:"delete" do %>
+                <div class="button-style size-inc">
+                  <span class="size-inc2">Remove</span>
+                </div>
+              <% end %>
               <%= link_to edit_user_item_path(item.user,item) do %>
-              <div class="button-style size-inc">
-                <span class="size-inc2">Edit</span>
-              </div>
+                <div class="button-style size-inc">
+                  <span class="size-inc2">Edit</span>
+                </div>
               <% end %>
             </div>
           </div>

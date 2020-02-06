@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items= Item.where.not(user_id: current_user.id).where(active: true).paginate(:page => params[:page], :per_page=>8)
+    @items= Item.where.not(user_id: current_user.id).where(active: true).where("quantity > ?",0).paginate(:page => params[:page], :per_page=>8)
     # authorize @items
   end
 
@@ -16,12 +16,6 @@ class ItemsController < ApplicationController
     if search==nil or search==""
       redirect_to user_items_path(current_user)
     else
-      # @items_array= Array.new
-      # Item.all.each do |item|
-      #   if item.name.downcase.include?search.downcase 
-      #     @items_array.push(item)
-      #   end
-      # end
       @items= Item.where.not(user_id: current_user).where(name: search).where(active: true).paginate(:page => params[:page], :per_page=>8)
       render 'index'
     end
@@ -81,9 +75,10 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
+    binding.pry
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to current_user, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to user_items_path(current_user), notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
