@@ -18,7 +18,7 @@
             <p class="size-inc">Added on <%= item.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></p>
           </div>
           <div class="col-lg-3 img-st-dim">
-            <%= link_to user_item_path(getCurrentUser,item) , method: "delete" do %>
+            <%= link_to url: user_item_path(getCurrentUser,item), method: "delete" do %>
               <div class="button-style size-inc">
                 <span class="size-inc2">Remove</span>
               </div>

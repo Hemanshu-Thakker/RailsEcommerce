@@ -7,6 +7,7 @@ class ItemPolicy < ApplicationPolicy
 	end
 
 	def edit?
+		binding.pry
 		return true if user == item.user
 	end
 
@@ -19,6 +20,7 @@ class ItemPolicy < ApplicationPolicy
     end
 
     def destroy?
+    	binding.pry
     	return true if user == item.user
     end
 

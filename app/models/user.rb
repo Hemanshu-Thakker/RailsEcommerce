@@ -20,9 +20,11 @@ class User < ApplicationRecord
 		standard_user=self
 		standard_item=item
 		standard_quant=quant
+		# mail the buyer
+		UserMailer.buyer_confirmation(self).deliver
+		# mail the seller
+		UserMailer.seller_confirmation(item.user).deliver
 		begin
-			# mail the buyer
-			UserMailer.buyer_confirmation(self).deliver
 			# Deduct money from the buyer
 			balance_updater = self.balance - quant * item.price.to_i
 			self.update(balance: balance_updater)
@@ -30,8 +32,6 @@ class User < ApplicationRecord
 			# Add money seller
 			balance_updater = item.user.balance.to_i + quant*item.price.to_i
 			item.user.update(balance: balance_updater)
-			# mail the seller
-			UserMailer.seller_confirmation(item.user).deliver
 			# Alter quantity of the product
 			update_quantity(item,quant)
 			# item_updater = item.quantity.to_i - quant
