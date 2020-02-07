@@ -26,7 +26,7 @@ class UsersController < ApplicationController
         # for temporary purpose
         @user.update(validate_user: true)
         # for temporary purpose
-        flash[:notice]= "Validation link sent to your mail"
+        flash[:notice]= "Validation link will be sent to your mail, login to continue"
         format.html { render :new }
         # format.json { render :show, status: :created, location: @user }
       else

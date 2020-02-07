@@ -12,14 +12,15 @@ class UserMailer < ApplicationMailer
 	def item_update(user,item)
 		@user=user
 		@item= item
-		# mail(to: @user.email, subject: "Item updated")
+		mail(to: @user.email, subject: "Item updated")
 	end
 	def password_reseter(user)
 		@user=user
-		#mail(to: @user.email, subject: "Password Reset")
+		mail(to: @user.email, subject: "Password Reset")
 	end
 	def email_validate(user)
 		@user=user
-		#mail(to: @user.email, subject: "Validate User")
+		attachments.inline["welcome.gif"]=File.read("#{Rails.root}/app/assets/images/welcome.gif")
+		mail(to: @user.email, subject: "Validate User")
 	end
 end
