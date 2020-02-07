@@ -12,7 +12,7 @@ class CartsController < ApplicationController
 			# applied
 			id=@cart_items.where.not(coupon_id: nil).pluck(:coupon_id).first
 			@coupon= Coupon.find(id)
-			@discounted_total= getTotal- (@coupon.discount/100)*getTotal
+			@discounted_total= getTotal- ((@coupon.discount/100)*getTotal).ceil(2)
 			flash[:notice]="Note: Coupon Applied"
 			@cart_items.where(coupon_id: nil).each do |ord|
 				price= ord.price-(@coupon.discount/100)*ord.price
