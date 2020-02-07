@@ -5,6 +5,8 @@ ruby '2.6.3'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 # Use postgres as the database for Active Record
 gem 'pg'
+#aws
+gem "aws-sdk-s3", require: false
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

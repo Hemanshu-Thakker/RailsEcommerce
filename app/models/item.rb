@@ -19,4 +19,10 @@ class Item < ApplicationRecord
   	UserMailer.item_update(self.user,self).deliver
   end
 
+  def item_img_url
+    if self.item_img.attachment
+      self.item_img.attachment.service_url
+    end
+  end
+
 end
