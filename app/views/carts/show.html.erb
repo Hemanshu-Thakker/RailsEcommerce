@@ -20,7 +20,7 @@
 				<div class="col-lg-6 img-st-dim">
 					<%= link_to user_item_path(getCurrentUser,getItem(ord.item_id)) do %>	              		
 	              		<% if item.item_img.attached? %>
-							<image src="<%=(  url_for(item.item_img) )%>" class="img-styling">
+							<image src="<%=(  url_for(getItem(ord.item_id).item_img) )%>" class="img-styling">
 						<% end %>
 	            	<% end %> 
 				</div>
