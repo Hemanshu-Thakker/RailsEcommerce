@@ -87,7 +87,7 @@
         </div>
         <div class="sandwich">  
             <% @item.comments.each do |cmt| %>
-              <%= render 'comment', cmt: cmt %>
+              <%= render 'items/comment', cmt: cmt %>
             <% end %>
         </div>
       </div>
