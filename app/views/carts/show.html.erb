@@ -19,7 +19,9 @@
 			<div class="row soldrow-styling2">
 				<div class="col-lg-6 img-st-dim">
 					<%= link_to user_item_path(getCurrentUser,getItem(ord.item_id)) do %>	              		
-	              		<%= getItem(ord.item_id).item_img_url %>
+	              		<% if item.item_img.attached? %>
+							<image src="<%=(  url_for(item.item_img) )%>" class="img-styling">
+						<% end %>
 	            	<% end %> 
 				</div>
 				<div class="col-lg-6">
