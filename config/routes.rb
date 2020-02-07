@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get 'users/:user_id/cart_orders' => 'cart_orders#show', as: 'order_confirmation'
   patch 'users/:user_id/update_in_cart/:id' => 'cart_orders#update_in_cart'
   get 'users/:user_id/update_in_cart/:id' => 'cart_orders#update_in_cart'
+  delete '/users/:user_id/items/:id/delete' => 'items#destroy', as: 'destroy_item'
+  get '/users/:user_id/items/:id/delete' => 'items#destroy'
 
   # coupons controller paths
   post 'users/:user_id/apply' => 'coupons#apply'

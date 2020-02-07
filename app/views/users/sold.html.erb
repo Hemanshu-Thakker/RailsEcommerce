@@ -12,7 +12,8 @@
           
           <div class="col-lg-3">
             <h4>Sold quantity: <%= ord.quantity %></h4>
-            <p class="size-inc">Item sold on <%= ord.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></p>
+            <span class="size-inc">Item sold on <%= ord.created_at.in_time_zone("Chennai").strftime("%d/%m/%y %I:%M%p") %></span>
+            <span class="size-inc">Item bought by <%= ord.user.username %></span>
           </div>
           <div class="col-lg-3">
             <!-- <div class="button-style">

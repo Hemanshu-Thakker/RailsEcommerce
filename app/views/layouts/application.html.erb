@@ -40,7 +40,7 @@
                 <%= link_to 'Home', user_items_path(current_user) , :class => "fonty nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Profile', user_path(current_user), :class => "fonty nav-link" %>
+                <%= link_to "Profile(#{current_user.username[0..2]})", user_path(current_user), :class => "fonty nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'Sold', "/users/#{current_user['id']}/sold", :class => "fonty nav-link" %>

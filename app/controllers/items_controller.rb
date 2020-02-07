@@ -75,7 +75,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    binding.pry
+    @item=Item.find(params[:id])
     @item.destroy
     respond_to do |format|
       format.html { redirect_to user_items_path(current_user), notice: 'Item was successfully destroyed.' }
