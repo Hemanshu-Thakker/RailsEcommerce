@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   # after_update :send_email_to_user
   after_update :send_email_to_user
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { in: 2..40 }
   validates :price, presence: true
   validates :quantity, presence: true
   validates_numericality_of :quantity, :only_integer => true, :greater_than_or_equal_to => 0

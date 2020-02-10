@@ -320,3 +320,7 @@
  label{
  	display: table!important; 
  }
+
+ .card{
+ 	min-height: 344px;
+ }
