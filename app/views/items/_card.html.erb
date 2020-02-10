@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <%= link_to user_item_path(getCurrentUser,item) do %>
-            <h4 class="card-title"><%= item.name %></h4>
+            <h5 class="card-title"><%= item.name %></h5>
         <% end %>
         <% if item.comments.exists? %>
             <div class="display-inline3">
