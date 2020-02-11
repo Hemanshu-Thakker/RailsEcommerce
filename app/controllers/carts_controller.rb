@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
 	include ApplicationHelper
+	
 	def index
 	end
 	def show
@@ -39,6 +40,7 @@ class CartsController < ApplicationController
 			else
 				@order=Order.create(user_id: current_user.id, item_id: ord.item_id, quantity: ord.quantity, price: ord.price_discounted)
 				if current_user.buy(ord.item,ord.quantity.to_i)
+					MailerWorker.perform_async(current_user.email,ord.item.user.email)
 				else
 					@order.destroy
 				end

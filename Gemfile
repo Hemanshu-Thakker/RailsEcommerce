@@ -7,6 +7,12 @@ gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 gem 'pg'
 #aws
 gem "aws-sdk-s3", require: false
+# sidekiq ruby library, workers read from redis queue
+gem 'sidekiq'
+# Web UI of sidekiq is written sinatra
+gem 'sinatra', github: 'sinatra/sinatra'
+# temporary solution for an error following sinatra
+gem 'rack', github: 'rack/rack', :ref => 'f690bb71425aa31d7b9b3113829af773950d8ab5'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

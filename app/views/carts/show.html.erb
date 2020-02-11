@@ -98,16 +98,6 @@
 							<% end %>
 						</div>
 						<%= form_with(url: user_item_cart_order_path(getCurrentUser,getItem(ord.item_id),ord.id), method:"patch" , local: true) do |form| %>
-					        <% if @cart.errors.any? %>
-					          <div id="error_explanation">
-					            <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this order from being saved:</h2>
-					            <ul>
-					            <% @cart.errors.full_messages.each do |message| %>
-					              <li><%= message %></li>
-					            <% end %>
-					            </ul>
-					          </div>
-					        <% end %>
 					        <span class="size-inc">Quantity : <%= form.number_field :quantity, value: ord.quantity, in: 1..ord.item.quantity, :class=>"rat-st" %><%= form.submit "save", :class=>"left-margin" %>
 					        </span>
 					    	<div class="display-inline marg-top">
