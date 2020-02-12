@@ -27,8 +27,8 @@ class CartsController < ApplicationController
 		@saved_items= @cart.cart_order.where(in_cart: false)
 		flag=false
 		@cart.cart_order.where(in_cart: true).find_each do |ord|
-			if ord.quantity=="" or ord.quantity == nil
-				@cart.errors.add(:quantity, "is invalid")
+			if ord.quantity=="" or ord.quantity == nil or ord.quantity>ord.item.quantity
+				@cart.errors.add(:quantity, "is invalid or out of stock")
 				flag=true
 				render 'show'
 				break
