@@ -53,10 +53,11 @@
               <li class="nav-item">
                 <%= link_to 'Add Products', new_user_item_path(current_user) , :class => "fonty nav-link" %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item display-inline fonty">
                 <%= link_to user_cart_path(current_user, current_user.cart) do %>
                   <%= image_tag("cart.png", :class => "cart-st") %>
                 <% end %>
+                <%= link_to 'Cart', user_cart_path(current_user, current_user.cart) , :class => " fonty-cart" %>
               </li>
               <li class="nav-item">
                 <%= link_to "Log out", logout_path, :class => "fonty extra-effect nav-link" %>
