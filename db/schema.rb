@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2020_02_03_133118) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 2020_02_03_133118) do
   end
 
   create_table "cart_orders", force: :cascade do |t|
-    t.integer "cart_id"
-    t.integer "item_id"
+    t.bigint "cart_id"
+    t.bigint "item_id"
     t.integer "quantity"
     t.boolean "in_cart", default: true
     t.float "price_discounted"
     t.float "price"
-    t.integer "coupon_id"
+    t.bigint "coupon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_orders_on_cart_id"
@@ -52,15 +52,15 @@ ActiveRecord::Schema.define(version: 2020_02_03_133118) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
+    t.bigint "user_id"
+    t.bigint "item_id"
     t.text "body"
     t.float "rating"
     t.datetime "created_at", null: false
@@ -76,28 +76,21 @@ ActiveRecord::Schema.define(version: 2020_02_03_133118) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "itemorders", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.float "price"
     t.integer "quantity"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "active"
+    t.boolean "active", default: false
     t.boolean "in_cart", default: true
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "item_id"
+    t.bigint "user_id"
+    t.bigint "item_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -116,4 +109,14 @@ ActiveRecord::Schema.define(version: 2020_02_03_133118) do
     t.string "email"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_orders", "carts"
+  add_foreign_key "cart_orders", "coupons"
+  add_foreign_key "cart_orders", "items"
+  add_foreign_key "carts", "users"
+  add_foreign_key "comments", "items"
+  add_foreign_key "comments", "users"
+  add_foreign_key "items", "users"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "users"
 end

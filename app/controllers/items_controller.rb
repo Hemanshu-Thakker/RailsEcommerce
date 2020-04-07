@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
     @item= Item.find(params[:id])
     @cart=current_user.cart
     @comment= Comment.new
+    @items = Items.where.not(id: @item.id)
   end
 
   # GET /items/new
