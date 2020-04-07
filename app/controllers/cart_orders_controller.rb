@@ -19,7 +19,7 @@ class CartOrdersController < ApplicationController
 		if @cart.cart_order.find_by_item_id(params[:item_id])==nil and (@quantity > 0 and @quantity <= @item.quantity)
 			@cart_orders=CartOrder.create(cart_id: @cart.id,quantity: @quantity,item_id: params[:item_id], price: @price, price_discounted: @price)
 			redirect_to user_cart_path(current_user,@cart)
-		elsif @quantity<=0 or @quantity>@item.quantity
+		elsif @quantity<=0 or @quantity>@item.quantity or @quantity =="" or @quantity==nil
 			@cart.errors.add(:quantity," is invalid")
 			render 'items/show'
 		else

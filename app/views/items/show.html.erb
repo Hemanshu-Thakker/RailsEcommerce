@@ -99,8 +99,8 @@
       <h3>Recommendations</h3>
       <div class="row">
         <% @items.each do |item| %>
-          <div class="col-lg-2">
-            <% if item.comments.exists? %>
+          <% if item.comments.exists? %>
+            <div class="col-lg-2">  
               <% if getAverageRating(item).ceil(0) >= 3 %>
                 <div class="">
                   <% if item.item_img.attached? %>
@@ -110,8 +110,8 @@
                 <h6><%= item.name %></h6>
                 <p class="card-text">Rs. <%= item.price %></p>
               <% end %>
-            <% end %>          
-          </div>
+            </div>
+          <% end %>          
         <% end %>
       </div>
     </div>
