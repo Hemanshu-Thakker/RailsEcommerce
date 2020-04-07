@@ -96,6 +96,7 @@
 
   <section class="sandwich">
     <div class="container">
+      <h3>Recommendations</h3>
       <div class="row">
         <% @items.each do |item| %>
           <div class="col-lg-2">
@@ -106,20 +107,8 @@
                     <image src="<%=(  url_for(item.item_img) )%>" class="img-styling-final">
                   <% end %>
                 </div>
-                <h3><%= item.name %></h3>
-                <div class="display-inline3">
-                  <% (1..getAverageRating(item).to_i).each do %>
-                        <%= image_tag("star.png", :class => "star-img") %>
-                  <% end %>
-                  <% if getAverageRating(item).ceil(0)-getAverageRating(item).to_i == 1 %>
-                    <%= image_tag("half-star.png", :class => "star-img") %>
-                  <% end %>
-                  <% (getAverageRating(item).ceil(0)+1..5).each do %>
-                    <%= image_tag("star_dull.png", :class => "star-img") %>
-                  <% end %>
-                  <span class="size-inc"><%= getAverageRating(item) %> / 5</span>
-                </div>
-                <h2 class="card-text">Rs. <%= item.price %></h2>
+                <h6><%= item.name %></h6>
+                <p class="card-text">Rs. <%= item.price %></p>
               <% end %>
             <% end %>          
           </div>
