@@ -330,6 +330,11 @@
  	min-height: 344px;
  }
 
+ .img-styling-final{
+  height: 100px;
+  width: 100px;
+ }
+
  /*.toggle{
     display: none;
  }
